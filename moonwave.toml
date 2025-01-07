@@ -1,0 +1,46 @@
+title = "Aimwork"
+gitRepoUrl = "https://github.com/Stefanuk12/Aimwork"
+gitSourceBranch = "master"
+changelog = true
+
+apiCategories = [
+    "constructor",
+    "destructor",
+]
+classOrder = [
+    "Aimwork",
+    "PlayerTracker",
+    "PlayerObject",
+    "FOVObject",
+    "Checks",
+    "Functions"
+]
+
+[home]
+enabled = true
+includeReadme = true
+
+[[home.features]]
+title = "Insane Optimisations"
+description = "Aimwork has been written from the ground up to be as optimised as possible"
+
+[[home.features]]
+title = "Reputable"
+description = "The developers behind Aimwork are well known in the community, often given the title of the first person to make a Da Hood silent aim in 2020"
+
+[[home.features]]
+title = "Free and Open Source"
+description = "The code behind Aimwork is one of the most high quality Roblox scripts out there. Not only that, but it's free and open source"
+
+[docusaurus]
+projectName = "Aimwork"
+url = "https://stefanuk12.github.io"
+baseUrl = "/Aimwork"
+tagline = "erm how 2 aim?"
+onBrokenLinks = "throw"
+onBrokenMarkdownLinks = "warn"
+
+[[navbar.items]]
+href = "https://discordapp.com/users/398271060514045964"
+label = "Discord"
+position = "right"

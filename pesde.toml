@@ -1,0 +1,33 @@
+name = "stefanuk12/aimwork"
+description = "The library for any Roblox aiming scripts."
+version = "0.1.0"
+authors = ["Stefanuk12"]
+license = "MIT"
+includes = [
+    "pesde.toml",
+    "README.md",
+    "LICENSE",
+    "src/*"
+]
+
+[target]
+environment = "lune"
+bin = "src/main.luau"
+lib = "src/init.luau"
+build_files = ["src"]
+
+[indices]
+default = "https://github.com/pesde-pkg/index"
+
+[wally_indices]
+default = "https://github.com/UpliftGames/wally-index"
+
+[dev_dependencies]
+darklua = { repo = "Stefanuk12/darklua", rev = "f59c9461c2cf3f7f52fac06c2f787591f39cec00" }
+stylua = { name = "pesde/stylua", version = "^2.0.1" }
+luau_lsp = { name = "pesde/luau_lsp", version = "^1.38.0" }
+selene = { name = "pesde/selene", version = "^0.27.1" }
+
+[dependencies]
+promise = { wally = "wally#evaera/promise", version = "^4.0.0" }
+trove = { wally = "wally#sleitnick/trove", version = "^1.5.0" }

@@ -1,0 +1,32 @@
+name: Check
+
+on:
+  workflow_call:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  code-style:
+    name: Verify code style and quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Pesde
+        uses: lumin-org/setup-pesde@v0.3.1
+        with:
+          cache: true
+
+      - name: StyLua
+        run: stylua --color always --check src
+
+      - name: Luau Analyze
+        run: luau_lsp analyze --settings .vscode/settings.json src
+
+      - name: Selene
+        run: selene -q src

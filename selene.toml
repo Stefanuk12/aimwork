@@ -1,0 +1,10 @@
+std = "roblox"
+exclude = [
+    "global_types/*",
+    "lune_packges/*",
+    "roblox_packages/*"
+]
+
+[lints]
+incorrect_standard_library_use = "allow"
+undefined_variable = "allow"
