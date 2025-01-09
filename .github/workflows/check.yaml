@@ -19,14 +19,22 @@ jobs:
 
       - name: Install Pesde
         uses: lumin-org/setup-pesde@v0.3.1
+        env:
+          GH_TOKEN: ${{ github.token }}
         with:
           cache: true
+
+      - name: Refresh Shell
+        run: export PATH="$PATH:~/.pesde/bin" && source ~/.bashrc && pesde install
 
       - name: StyLua
         run: stylua --color always --check src
 
       - name: Luau Analyze
-        run: luau_lsp analyze --settings .vscode/settings.json src
+        run: |
+          TYPES_FILE=globalTypes.d.lua
+          curl https://raw.githubusercontent.com/JohnnyMorganz/luau-lsp/main/scripts/globalTypes.d.lua > $TYPES_FILE
+          luau_lsp analyze --settings .vscode/settings.json --definitions=$TYPES_FILE src
 
       - name: Selene
         run: selene -q src
