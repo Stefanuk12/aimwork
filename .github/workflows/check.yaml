@@ -25,16 +25,24 @@ jobs:
           cache: true
 
       - name: Refresh Shell
-        run: export PATH="$PATH:~/.pesde/bin" && source ~/.bashrc && pesde install
+        run: export PATH="$PATH:~/.pesde/bin" && source ~/.bashrc
+
+      - name: Install Pesde Dependencies
+        run: pesde install
 
       - name: StyLua
         run: stylua --color always --check src
 
+      - name: Download Luau Types
+        run: curl -s https://raw.githubusercontent.com/JohnnyMorganz/luau-lsp/main/scripts/globalTypes.d.lua > globalTypes.d.lua
+
       - name: Luau Analyze
         run: |
-          TYPES_FILE=globalTypes.d.lua
-          curl https://raw.githubusercontent.com/JohnnyMorganz/luau-lsp/main/scripts/globalTypes.d.lua > $TYPES_FILE
-          luau_lsp analyze --settings .vscode/settings.json --definitions=$TYPES_FILE src
+          output=$(luau_lsp analyze --settings .vscode/settings.json --definitions=globalTypes.d.lua src)
+          echo "$output"
+          if [ -n "$(echo "$output" | grep -v '^\s*$')" ]; then
+            exit 1
+          fi
 
       - name: Selene
         run: selene -q src
