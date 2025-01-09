@@ -1,24 +1,68 @@
-# .github/workflows/publish-docs.yml
-name: publish-docs
+# https://github.com/devSparkle/Overture/blob/main/.github/workflows/documentation.yml
+name: Generate Documentation
+run-name: Generate documentation for ${{ github.ref_name }} by @${{ github.actor }}
+
 on:
   push:
-    branches: ["main"]
+  workflow_dispatch:
+  release:
+    types: [created]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  status:
+  build:
     runs-on: ubuntu-latest
-    name: Publish docs to GitHub Pages
+    
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      # Build steps
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: "22"
-      - run: npm i -g moonwave@latest
-      - name: Publish
-        run: |
-          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git config --global user.email "support+actions@github.com"
-          git config --global user.name "github-actions-bot"
-          moonwave build --publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_OPTIONS: "--no-experimental-require-module"
+          cache: "npm"
+          cache-dependency-path: "**/.github/workflows/*.yml"
+      - name: Build
+        run: npx moonwave build
+      
+      # Upload steps
+      - name: Upload artifact
+        if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation
+          path: build
+          retention-days: 5
+  
+  publish:
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    
+    needs: build
+    runs-on: ubuntu-latest
+    
+    concurrency:
+      group: "pages"
+      cancel-in-progress: true
+    
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: documentation
+          path: build
+      
+      # Upload steps
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+  
