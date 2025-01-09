@@ -229,7 +229,8 @@ do
         if
             (not Distance or Distance < Selected.Distance)
             or (
-                Configuration.WallCheck == "Full" and self:WallHit(Player, Part, Player.Character :: any, CurrentCamera)
+                Configuration.WallCheck == "Full"
+                and self:WallHit(Player, Part, Player.Character :: any, CurrentCamera)
             )
         then
             return
