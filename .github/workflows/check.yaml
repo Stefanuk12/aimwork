@@ -39,12 +39,12 @@ jobs:
       - name: Luau Analyze
         run: |
           set -e
-          output=$(luau_lsp analyze --settings .vscode/settings.json --definitions=globalTypes.d.lua src)
+          output=$(luau_lsp analyze --settings .vscode/settings.json --definitions=globalTypes.d.lua src 2>&1)
           if [ -n "$(echo "$output" | grep -v '^\s*$')" ]; then
             echo "Luau Analyze found issues:"
             echo "$output"
             exit 1
-          fi
+          fi 
 
       - name: Selene
         run: selene -q src
