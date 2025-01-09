@@ -1,9 +1,9 @@
 -- // Dependencies
 local ConfigurationDef = require("@core/config")
 local Functions = require("@functions")
-local PlayerTracker = require("./player_tracker")
-local PlayerObjectTypes = require("./player_object")
-local FOVObjectTypes = require("@modules/fov_object")
+local PlayerTracker = require("@modules/player/tracker")
+local PlayerObjectTypes = require("@modules/player/object")
+local FOVObjectTypes = require("@modules/visuals/fov_object")
 local AimworkSelectedType = require("@types/selected")
 
 -- // Services

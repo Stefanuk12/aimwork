@@ -1,5 +1,5 @@
 -- // Dependencies
-local PlayerObjectTypes = require("@modules/player_object")
+local PlayerObjectTypes = require("@modules/player/object")
 
 -- //
 export type Configuration = {

@@ -1,6 +1,6 @@
 -- // Dependencies
 local TroveBuilder = require("@pkgs/trove")
-local PlayerObject = require("./player_object")
+local PlayerObject = require("./object")
 
 -- // Services
 local Players = game:GetService("Players")

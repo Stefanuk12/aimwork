@@ -4,8 +4,8 @@ local Configuration = require("@core/config")
 local AimworkChecksType = require("@modules/checks")
 local AimworkSelectedType = require("@types/selected")
 
-local PlayerObjectTypes = require("@modules/player_object")
-local FOVObject = require("@modules/fov_object")
+local PlayerObjectTypes = require("@modules/player/object")
+local FOVObject = require("@modules/visuals/fov_object")
 
 -- // Types
 export type AimworkData = {

@@ -2,7 +2,7 @@
 local AimworkChecks = require("@modules/checks")
 local AimworkTypes = require("@types/aimwork")
 local AimworkSelectedType = require("@types/selected")
-local PlayerObjectTypes = require("@modules/player_object")
+local PlayerObjectTypes = require("@modules/player/object")
 
 -- //
 local PlayerCheck = AimworkChecks.PlayerCheck

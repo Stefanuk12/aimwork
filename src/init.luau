@@ -4,10 +4,10 @@ local Patches = require("@patches")
 
 local Configuration = require("@core/config")
 
-local PlayerObjectTypes = require("@modules/player_object")
+local PlayerObjectTypes = require("@modules/player/object")
 local AimworkSelectedType = require("@types/selected")
 
-local FOVObject = require("@modules/fov_object")
+local FOVObject = require("@modules/visuals/fov_object")
 local AimworkChecks = require("@modules/checks")
 
 local AimworkTypes = require("@types/aimwork")
