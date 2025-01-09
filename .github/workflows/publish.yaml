@@ -24,9 +24,7 @@ jobs:
       # Build steps
       - name: Setup Node.js
         uses: actions/setup-node@v4
-        with:
-          cache: "npm"
-          cache-dependency-path: "**/.github/workflows/*.yml"
+
       - name: Build
         run: npx moonwave build
       
