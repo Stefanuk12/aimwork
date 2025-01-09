@@ -35,7 +35,7 @@ description = "The code behind Aimwork is one of the most high quality Roblox sc
 [docusaurus]
 projectName = "Aimwork"
 url = "https://stefanuk12.github.io"
-baseUrl = "/Aimwork"
+baseUrl = "/aimwork"
 tagline = "erm how 2 aim?"
 onBrokenLinks = "throw"
 onBrokenMarkdownLinks = "warn"
