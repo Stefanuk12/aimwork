@@ -3,7 +3,6 @@ name: Generate Documentation
 run-name: Generate documentation for ${{ github.ref_name }} by @${{ github.actor }}
 
 on:
-  push:
   workflow_dispatch:
   release:
     types: [created]
