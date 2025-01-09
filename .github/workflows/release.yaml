@@ -81,6 +81,12 @@ jobs:
         with:
           cache: true
 
+      - name: Refresh Shell
+        run: export PATH="$PATH:~/.pesde/bin" && source ~/.bashrc
+
+      - name: Install Pesde Dependencies
+        run: pesde install
+
       - name: Darklua
         run: darklua process src/init.luau dist.luau -c .darklua.json
 
