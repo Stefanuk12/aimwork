@@ -25,7 +25,7 @@ default = "https://github.com/UpliftGames/wally-index"
 [dev_dependencies]
 darklua = { repo = "Stefanuk12/darklua", rev = "f59c9461c2cf3f7f52fac06c2f787591f39cec00" }
 stylua = { name = "pesde/stylua", version = "^2.0.1" }
-luau_lsp = { name = "pesde/luau_lsp", version = "^1.38.0" }
+luau_lsp = { name = "pesde/luau_lsp", version = "^1.39.2" }
 selene = { name = "pesde/selene", version = "^0.27.1" }
 
 [dependencies]

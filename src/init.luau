@@ -10,6 +10,8 @@ local AimworkSelectedType = require("@types/selected")
 local FOVObject = require("@modules/visuals/fov_object")
 local AimworkChecks = require("@modules/checks")
 
+local VisualHandler = require("@modules/visuals")
+
 local AimworkTypes = require("@types/aimwork")
 
 -- // Services
@@ -67,10 +69,12 @@ do
 
         -- // Initialise properties
         self.Trove = TroveBuilder.new()
-        self.FOV = FOVObject.new(Settings.FOVSettings)
-        self.Checks = AimworkChecks.new(self.FOV, Settings)
+        self.Visuals = VisualHandler.new()
+        self.Checks = AimworkChecks.new(Settings)
         self.Settings = Settings
         self.Selected = nil
+
+        self.Visuals:Add(FOVObject.new("Main", Settings.FOVSettings) :: any)
 
         -- // Return the object
         return self
@@ -93,6 +97,7 @@ do
         @tag destructor
     ]=]
     function Aimwork.Destroy(self: Aimwork)
+        self.Visuals:Destroy()
         self.Checks:Destroy()
         self.Trove:Destroy()
         setmetatable(self :: any, nil)
@@ -125,7 +130,7 @@ do
 
         -- // Perform part checks
         for _, v in ipairs(Player.BodyParts) do
-            self.Checks:PartChecks(Player, v, self.Selected :: any)
+            self.Checks:PartChecks(Player, v, self.Visuals.Objects, self.Selected :: any)
         end
     end
 
@@ -142,8 +147,8 @@ do
             self.Selected = table.clone(DefaultSelected)
         end
 
-        -- // Update FOV
-        self.FOV:Update()
+        -- // Update FOV positions
+        self.Visuals:Update()
 
         -- // Iterate through all players
         for _, v in ipairs(self.Checks.PlayerTracker.Players) do

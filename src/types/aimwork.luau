@@ -5,13 +5,13 @@ local AimworkChecksType = require("@modules/checks")
 local AimworkSelectedType = require("@types/selected")
 
 local PlayerObjectTypes = require("@modules/player/object")
-local FOVObject = require("@modules/visuals/fov_object")
+local VisualHandler = require("@modules/visuals")
 
 -- // Types
 export type AimworkData = {
     Trove: any,
-    FOV: FOVObject.FOVObject,
     Checks: AimworkChecksType.Checks,
+    Visuals: VisualHandler.VisualHandler,
     Settings: Configuration.Configuration,
     Selected: AimworkSelectedType.AimworkSelected?,
 }

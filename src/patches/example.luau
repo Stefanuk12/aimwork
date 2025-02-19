@@ -3,6 +3,7 @@ local AimworkChecks = require("@modules/checks")
 local AimworkTypes = require("@types/aimwork")
 local AimworkSelectedType = require("@types/selected")
 local PlayerObjectTypes = require("@modules/player/object")
+local VisualHandlerTypes = require("@modules/visuals")
 
 -- //
 local PlayerCheck = AimworkChecks.PlayerCheck
@@ -22,12 +23,13 @@ return function(Aimwork: AimworkTypes.Aimwork)
     function Aimwork.Checks:PartChecks(
         Player: PlayerObject,
         Part: BasePart,
+        FOVs: { [VisualHandlerTypes.FOVPrimative]: VisualHandlerTypes.AdditionalFOVData },
         Selected: AimworkSelectedType.AimworkSelected
     )
         if false then -- some condition
             return -- do nothing
         end
 
-        return PartChecks(self, Player, Part, Selected)
+        return PartChecks(self, Player, Part, FOVs, Selected)
     end
 end

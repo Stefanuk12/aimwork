@@ -28,6 +28,7 @@ end
 local FOVObject = {}
 FOVObject.__index = FOVObject
 export type FOVObjectData = {
+    Id: string,
     Drawing: DrawingEnumWithData,
 }
 export type FOVObject = typeof(setmetatable({} :: FOVObjectData, FOVObject))
@@ -123,7 +124,7 @@ do
 
         @tag constructor
     ]=]
-    function FOVObject.new(DrawingData: DrawingOptionalDataEnum): FOVObject
+    function FOVObject.new(Id: string, DrawingData: DrawingOptionalDataEnum): FOVObject
         -- // Create the object
         local self = setmetatable({}, FOVObject)
 
@@ -131,6 +132,7 @@ do
         local Defaults = FOVDefaults[DrawingData.Kind]
         assert(Defaults, "could not find drawing defaults")
         Defaults = table.clone(Defaults)
+        self.Id = Id
         self.Drawing = {
             Kind = DrawingData.Kind,
             Data = MergeTables(Defaults, DrawingData.Value),

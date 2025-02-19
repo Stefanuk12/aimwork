@@ -3,7 +3,7 @@ local ConfigurationDef = require("@core/config")
 local Functions = require("@functions")
 local PlayerTracker = require("@modules/player/tracker")
 local PlayerObjectTypes = require("@modules/player/object")
-local FOVObjectTypes = require("@modules/visuals/fov_object")
+local VisualHandlerTypes = require("@modules/visuals")
 local AimworkSelectedType = require("@types/selected")
 
 -- // Services
@@ -40,7 +40,6 @@ local Checks = {}
 Checks.__index = Checks
 export type ChecksData = {
     PlayerTracker: PlayerTracker.PlayerTracker,
-    FOV: FOVObjectTypes.FOVObject,
     Configuration: ConfigurationDef.Configuration,
 }
 export type Checks = typeof(setmetatable({} :: ChecksData, Checks))
@@ -48,17 +47,15 @@ do
     --[=[
         Constructs a new [Checks] object.
 
-        @param FOV FOVObject
         @param Config Configuration
         @tag constructor
     ]=]
-    function Checks.new(FOV: FOVObjectTypes.FOVObject, Config: ConfigurationDef.Configuration): Checks
+    function Checks.new(Config: ConfigurationDef.Configuration): Checks
         -- // Create the object
         local self = setmetatable({}, Checks)
 
         -- // Initialise properties
         self.Configuration = Config
-        self.FOV = FOV
         self.PlayerTracker = PlayerTracker.new()
 
         -- // Return the object
@@ -210,6 +207,7 @@ do
         self: Checks,
         Player: PlayerObject,
         Part: BasePart,
+        FOVs: { [VisualHandlerTypes.FOVPrimative]: VisualHandlerTypes.AdditionalFOVData },
         Selected: AimworkSelectedType.AimworkSelected
     )
         local Configuration = self.Configuration.Checks
@@ -224,15 +222,25 @@ do
         end
 
         local ScreenPosition2D = Vector2.new(ScreenPosition.X, ScreenPosition.Y)
-        local Distance = self.FOV:InsideFOV(ScreenPosition2D)
+        local Distance
+        for FOV, FOVData in pairs(FOVs) do
+            if not FOVData.CheckEnabled then
+                continue
+            end
 
-        if
-            (not Distance or Distance < Selected.Distance)
-            or (
-                Configuration.WallCheck == "Full"
-                and self:WallHit(Player, Part, Player.Character :: any, CurrentCamera)
-            )
-        then
+            Distance = FOV:InsideFOV(ScreenPosition2D)
+            if
+                (not Distance or Distance < Selected.Distance)
+                or (
+                    Configuration.WallCheck == "Full"
+                    and self:WallHit(Player, Part, Player.Character :: any, CurrentCamera)
+                )
+            then
+                return
+            end
+        end
+
+        if not Distance then
             return
         end
 
