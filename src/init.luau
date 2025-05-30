@@ -57,6 +57,8 @@ local Aimwork = {}
 Aimwork.__index = Aimwork
 type Aimwork = AimworkTypes.Aimwork
 do
+    Aimwork.DefaultConfiguration = Configuration
+
     --[=[
         Constructs a new [PlayerObject].
 

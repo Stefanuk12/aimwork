@@ -18,8 +18,9 @@ export type AimworkData = {
 export type AimworkMethods = {
     __index: AimworkMethods,
     new: (Configuration.Configuration) -> Aimwork,
-    LoadPatch: (self: Aimwork, string) -> (),
+    Initialise: (self: Aimwork) -> (),
     Destroy: (self: Aimwork) -> (),
+    LoadPatch: (self: Aimwork, string) -> (),
     IteratePlayer: (self: Aimwork, Player: PlayerObjectTypes.PlayerObject) -> (),
     Iterate: (self: Aimwork) -> (),
 }
