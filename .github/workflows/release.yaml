@@ -18,7 +18,7 @@ jobs:
         id: read_name
         with:
           file: 'pesde.toml'
-          field: 'package.name'
+          field: 'name'
 
       - name: Process file name
         id: process_file_name
@@ -31,7 +31,7 @@ jobs:
         id: read_version
         with:
           file: 'pesde.toml'
-          field: 'package.version'
+          field: 'version'
 
     outputs:
       name: ${{ steps.process_file_name.outputs.value }}
