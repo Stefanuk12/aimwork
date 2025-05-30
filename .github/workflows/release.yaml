@@ -94,7 +94,7 @@ jobs:
         run: darklua process src/init.luau ./dist.luau -c .darklua.json
 
       - name: Upload archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ needs.release-data.outputs.name }}.luau
           path: ./dist.luau
