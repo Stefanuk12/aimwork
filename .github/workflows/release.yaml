@@ -83,7 +83,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         with:
           cache: true
-          version: v0.7.0-rc.3
 
       - name: Refresh Shell
         run: export PATH="$PATH:~/.pesde/bin" && source ~/.bashrc
