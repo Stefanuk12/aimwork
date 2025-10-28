@@ -10,11 +10,14 @@ includes = [
     "src/*"
 ]
 
+[engines]
+pesde = "^0.7.1"
+lune = "=0.10.4"
+
 [target]
-environment = "roblox"
-bin = "src/main.luau"
-lib = "src/init.luau"
 build_files = ["src"]
+environment = "roblox"
+lib = "src/init.luau"
 
 [indices]
 default = "https://github.com/pesde-pkg/index"
@@ -23,10 +26,14 @@ default = "https://github.com/pesde-pkg/index"
 default = "https://github.com/UpliftGames/wally-index"
 
 [dev_dependencies]
-darklua = { repo = "Stefanuk12/darklua", rev = "90d682b16d3e130d93b405b05f0515b32dae1659", target = "lune" }
-stylua = { name = "pesde/stylua", version = "^2.0.1", target = "lune" }
-luau_lsp = { name = "pesde/luau_lsp", version = "^1.39.2", target = "lune" }
-selene = { name = "pesde/selene", version = "^0.27.1", target = "lune" }
+darklua = { repo = "Stefanuk12/darklua", rev = "a1ac53a49d4c2e44e9bf28e95185e3f14c9892c4", target = "lune" }
+luau_defs = { repo = "rocult/luau-defs", rev = "8a7e73fb46324cb93e38e4ca64b7c5f10d4a4d3d", target = "luau" }
+
+luau_lsp = { name = "pesde/luau_lsp", version = "^1.55.0", target = "lune" }
+rojo = { name = "pesde/rojo", version = "^7.4.4", target = "lune" }
+scripts = { name = "pesde/scripts_rojo", version = "^0.2.0", target = "lune" }
+selene = { name = "pesde/selene", version = "^0.29.0", target = "lune" }
+stylua = { name = "pesde/stylua", version = "^2.0.2", target = "lune" }
 
 [dependencies]
 trove = { wally = "wally#sleitnick/trove", version = "^1.5.0" }

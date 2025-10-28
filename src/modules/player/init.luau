@@ -1,1 +1,1 @@
-return require("./tracker")
+return require("@modules/player/tracker")

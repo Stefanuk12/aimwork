@@ -1,4 +1,5 @@
 -- // Dependencies
+local DrawingTypes = require("@types/extra_drawing")
 local MergeTables = require("@functions/merge_tables")
 
 -- // Services
@@ -29,7 +30,7 @@ local FOVObject = {}
 FOVObject.__index = FOVObject
 export type FOVObjectData = {
     Id: string,
-    Drawing: DrawingEnumWithData,
+    Drawing: DrawingTypes.DrawingEnumWithData,
 }
 export type FOVObject = typeof(setmetatable({} :: FOVObjectData, FOVObject))
 do
@@ -43,7 +44,7 @@ do
             Thickness = 1,
             From = Vector2.zero,
             To = Vector2.zero,
-        } :: DrawingLineData,
+        } :: DrawingTypes.DrawingLineData,
         Text = {
             Visible = false,
             ZIndex = 1,
@@ -57,7 +58,7 @@ do
             OutlineColor = Color3.new(),
             Position = Vector2.zero,
             TextBounds = Vector2.zero,
-        } :: DrawingTextData,
+        } :: DrawingTypes.DrawingTextData,
         Image = {
             Visible = false,
             ZIndex = 1,
@@ -68,7 +69,7 @@ do
             Size = Vector2.zero,
             Position = Vector2.zero,
             Rounding = 0,
-        } :: DrawingImageData,
+        } :: DrawingTypes.DrawingImageData,
         Circle = {
             Visible = false,
             ZIndex = 1,
@@ -80,7 +81,7 @@ do
             Radius = 0,
             Filled = false,
             Position = Vector2.zero,
-        } :: DrawingCircleData,
+        } :: DrawingTypes.DrawingCircleData,
         Square = {
             Visible = false,
             ZIndex = 1,
@@ -91,7 +92,7 @@ do
             Size = Vector2.zero,
             Position = Vector2.zero,
             Filled = false,
-        } :: DrawingSquareData,
+        } :: DrawingTypes.DrawingSquareData,
         Quad = {
             Visible = false,
             ZIndex = 1,
@@ -104,7 +105,7 @@ do
             PointC = Vector2.zero,
             PointD = Vector2.zero,
             Filled = false,
-        } :: DrawingQuadData,
+        } :: DrawingTypes.DrawingQuadData,
         Triangle = {
             Visible = false,
             ZIndex = 1,
@@ -116,7 +117,7 @@ do
             PointB = Vector2.zero,
             PointC = Vector2.zero,
             Filled = false,
-        } :: DrawingTriangleData,
+        } :: DrawingTypes.DrawingTriangleData,
     }
 
     --[=[
@@ -124,7 +125,7 @@ do
 
         @tag constructor
     ]=]
-    function FOVObject.new(Id: string, DrawingData: DrawingOptionalDataEnum): FOVObject
+    function FOVObject.new(Id: string, DrawingData: DrawingTypes.DrawingOptionalDataEnum): FOVObject
         -- // Create the object
         local self = setmetatable({}, FOVObject)
 

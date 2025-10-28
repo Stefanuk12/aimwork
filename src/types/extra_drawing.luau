@@ -203,4 +203,5 @@ export type Drawing = {
     Fonts: DrawingFonts,
     new: DrawingNewFunction
 }
-declare Drawing: Drawing
+
+return true

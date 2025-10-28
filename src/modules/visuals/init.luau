@@ -1,5 +1,5 @@
 -- // Dependencies
-local FOVObjectTypes = require("./fov_object")
+local FOVObjectTypes = require("@modules/visuals/fov_object")
 
 -- // Types
 export type AdditionalFOVData = {
@@ -12,6 +12,9 @@ export type VisualHandlerData = {
 }
 
 --[=[
+    @class VisualHandler
+
+    Manages all visual objects.
 ]=]
 local VisualHandler = {}
 VisualHandler.__index = VisualHandler

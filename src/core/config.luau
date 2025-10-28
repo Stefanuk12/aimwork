@@ -1,4 +1,5 @@
 -- // Dependencies
+local DrawingTypes = require("@types/extra_drawing")
 local PlayerObjectTypes = require("@modules/player/object")
 
 -- //
@@ -12,7 +13,7 @@ export type Configuration = {
         WallCheck: "OnScreen" | "Full" | false,
     },
 
-    FOVSettings: DrawingOptionalDataEnum,
+    FOVSettings: DrawingTypes.DrawingOptionalDataEnum,
 
     Ignored: {
         IgnoreLocalTeam: boolean,
@@ -44,7 +45,7 @@ local Configuration: Configuration = {
             Thickness = 1,
             Radius = 60,
             Color = Color3.fromRGB(231, 84, 128),
-        } :: DrawingCircleData,
+        } :: DrawingTypes.DrawingCircleData,
     },
 
     Ignored = {
