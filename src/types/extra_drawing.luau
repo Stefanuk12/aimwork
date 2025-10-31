@@ -49,7 +49,7 @@ export type DrawingImageData = DrawingBaseData & {
     Data: string, --writeonly
     Size: Vector2,
     Position: Vector2,
-    Rounding: number,   
+    Rounding: number,
 }
 export type DrawingImageOptionalData = DrawingBaseOptionalData & {
     Data: string?,
@@ -137,42 +137,55 @@ export type DrawingFontsData = {
 }
 
 export type DrawingEnum =
-    { Kind: "Line", Value: DrawingLine } |
-    { Kind: "Text", Value: DrawingText } |
-    { Kind: "Image", Value: DrawingImage } |
-    { Kind: "Circle", Value: DrawingCircle } |
-    { Kind: "Square", Value: DrawingSquare } |
-    { Kind: "Quad", Value: DrawingQuad } |
-    { Kind: "Triangle", Value: DrawingTriangle }
+    { Kind: "Line", Value: DrawingLine }
+    | { Kind: "Text", Value: DrawingText }
+    | { Kind: "Image", Value: DrawingImage }
+    | { Kind: "Circle", Value: DrawingCircle }
+    | { Kind: "Square", Value: DrawingSquare }
+    | { Kind: "Quad", Value: DrawingQuad }
+    | { Kind: "Triangle", Value: DrawingTriangle }
 export type DrawingDataEnum =
-    { Kind: "Line", Value: DrawingLineData } |
-    { Kind: "Text", Value: DrawingTextData } |
-    { Kind: "Image", Value: DrawingImageData } |
-    { Kind: "Circle", Value: DrawingCircleData } |
-    { Kind: "Square", Value: DrawingSquareData } |
-    { Kind: "Quad", Value: DrawingQuadData } |
-    { Kind: "Triangle", Value: DrawingTriangleData }
+    { Kind: "Line", Value: DrawingLineData }
+    | { Kind: "Text", Value: DrawingTextData }
+    | { Kind: "Image", Value: DrawingImageData }
+    | { Kind: "Circle", Value: DrawingCircleData }
+    | { Kind: "Square", Value: DrawingSquareData }
+    | { Kind: "Quad", Value: DrawingQuadData }
+    | { Kind: "Triangle", Value: DrawingTriangleData }
 export type DrawingOptionalDataEnum =
-    { Kind: "Line", Value: DrawingLineOptionalData } |
-    { Kind: "Text", Value: DrawingTextOptionalData } |
-    { Kind: "Image", Value: DrawingImageOptionalData } |
-    { Kind: "Circle", Value: DrawingCircleOptionalData } |
-    { Kind: "Square", Value: DrawingSquareOptionalData } |
-    { Kind: "Quad", Value: DrawingQuadOptionalData } |
-    { Kind: "Triangle", Value: DrawingTriangleOptionalData }
+    { Kind: "Line", Value: DrawingLineOptionalData }
+    | { Kind: "Text", Value: DrawingTextOptionalData }
+    | { Kind: "Image", Value: DrawingImageOptionalData }
+    | { Kind: "Circle", Value: DrawingCircleOptionalData }
+    | { Kind: "Square", Value: DrawingSquareOptionalData }
+    | { Kind: "Quad", Value: DrawingQuadOptionalData }
+    | { Kind: "Triangle", Value: DrawingTriangleOptionalData }
 export type DrawingEnumWithData =
-    { Kind: "Line", Value: DrawingLine?, Data: DrawingLine } |
-    { Kind: "Text", Value: DrawingText?, Data: DrawingText } |
-    { Kind: "Image", Value: DrawingImage?, Data: DrawingImage } |
-    { Kind: "Circle", Value: DrawingCircle?, Data: DrawingCircle } |
-    { Kind: "Square", Value: DrawingSquare?, Data: DrawingSquare } |
-    { Kind: "Quad", Value: DrawingQuad?, Data: DrawingQuad } |
-    { Kind: "Triangle", Value: DrawingTriangle?, Data: DrawingTriangleData }
-
+    { Kind: "Line", Value: DrawingLine?, Data: DrawingLine }
+    | { Kind: "Text", Value: DrawingText?, Data: DrawingText }
+    | { Kind: "Image", Value: DrawingImage?, Data: DrawingImage }
+    | { Kind: "Circle", Value: DrawingCircle?, Data: DrawingCircle }
+    | { Kind: "Square", Value: DrawingSquare?, Data: DrawingSquare }
+    | { Kind: "Quad", Value: DrawingQuad?, Data: DrawingQuad }
+    | { Kind: "Triangle", Value: DrawingTriangle?, Data: DrawingTriangleData }
 
 export type DrawingNewTypes = "Line" | "Text" | "Image" | "Circle" | "Square" | "Quad" | "Triangle"
-export type DrawingObject = DrawingLine | DrawingText | DrawingImage | DrawingCircle | DrawingSquare | DrawingQuad | DrawingTriangle
-export type DrawingObjectData = DrawingLineData | DrawingTextData | DrawingImageData | DrawingCircleData | DrawingSquareData | DrawingQuadData | DrawingTriangleData
+export type DrawingObject =
+    DrawingLine
+    | DrawingText
+    | DrawingImage
+    | DrawingCircle
+    | DrawingSquare
+    | DrawingQuad
+    | DrawingTriangle
+export type DrawingObjectData =
+    DrawingLineData
+    | DrawingTextData
+    | DrawingImageData
+    | DrawingCircleData
+    | DrawingSquareData
+    | DrawingQuadData
+    | DrawingTriangleData
 
 export type DrawingNewFunction =
     (("Line") -> DrawingLine)
@@ -196,12 +209,12 @@ export type DrawingSetPropertiesFunction =
     & ((DrawingImage, DrawingImageData) -> DrawingImage)
     & ((DrawingCircle, DrawingCircleData) -> DrawingCircle)
     & ((DrawingSquare, DrawingSquareData) -> DrawingSquare)
-    & ((DrawingQuad, DrawingQuadData) -> DrawingQuad)   
+    & ((DrawingQuad, DrawingQuadData) -> DrawingQuad)
     & ((DrawingTriangle, DrawingTriangleData) -> DrawingTriangle)
 
 export type Drawing = {
     Fonts: DrawingFonts,
-    new: DrawingNewFunction
+    new: DrawingNewFunction,
 }
 
 return true

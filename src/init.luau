@@ -72,7 +72,7 @@ do
             Visuals = VisualHandler.new(),
             Checks = AimworkChecks.new(Settings),
             Settings = Settings,
-            Selected = nil
+            Selected = nil,
         }
         self = setmetatable(self, Aimwork)
 

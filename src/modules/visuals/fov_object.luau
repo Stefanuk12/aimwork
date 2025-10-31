@@ -156,7 +156,7 @@ do
             return
         end
 
-        local Object = Drawing.new(self.Drawing.Kind :: any) :: any;
+        local Object = Drawing.new(self.Drawing.Kind :: any) :: any
         (self.Drawing :: any).Value = Object
         self:SetDrawingData()
     end
@@ -169,7 +169,7 @@ do
         if not Object then
             return
         end
-    
+
         for i, v in pairs(self.Drawing.Data :: any) do -- LUAU TYPE SOLVER ISSUE
             (Object :: any)[i] = v -- LUAU TYPE SOLVER ISSUE
         end
