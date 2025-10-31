@@ -45,7 +45,7 @@ local Configuration: Configuration = {
             Thickness = 1,
             Radius = 60,
             Color = Color3.fromRGB(231, 84, 128),
-        } :: DrawingTypes.DrawingCircleData,
+        } :: DrawingTypes.DrawingCircleOptionalData,
     },
 
     Ignored = {
@@ -57,7 +57,7 @@ local Configuration: Configuration = {
         Teams = {},
         Players = {},
     },
-    RaycastIgnore = function(Player, Camera)
+    RaycastIgnore = function(Player: PlayerObjectTypes.PlayerObject, Camera: Camera)
         local Ignored: { Instance } = { Camera }
 
         if Player.Character then

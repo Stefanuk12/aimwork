@@ -7,10 +7,10 @@
     @param Source table -- The source table to get the properties from
     @return table -- The destination table with the merged properties from the source table
 ]=]
-local function MergeTables<T, U>(Destination: T, Source: U): T & U
+local function MergeTables<T, U>(Destination: T & {}, Source: U & {}): T & U
     -- // Ensure both A and B are tables, prefer to return A, if they're not
     if typeof(Destination) ~= "table" or typeof(Source) ~= "table" then
-        return Destination
+        return Destination :: any
     end
 
     -- // Loop through the source table
