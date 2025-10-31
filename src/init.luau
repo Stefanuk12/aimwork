@@ -67,19 +67,19 @@ do
     ]=]
     function Aimwork.new(Settings: Configuration.Configuration): Aimwork
         -- // Create the object
-        local self = setmetatable({}, Aimwork)
-
-        -- // Initialise properties
-        self.Trove = TroveBuilder.new()
-        self.Visuals = VisualHandler.new()
-        self.Checks = AimworkChecks.new(Settings)
-        self.Settings = Settings
-        self.Selected = nil
+        local self: AimworkTypes.AimworkData = {
+            Trove = TroveBuilder.new(),
+            Visuals = VisualHandler.new(),
+            Checks = AimworkChecks.new(Settings),
+            Settings = Settings,
+            Selected = nil
+        }
+        self = setmetatable(self, Aimwork)
 
         self.Visuals:Add(FOVObject.new("Main", Settings.FOVSettings) :: any)
 
         -- // Return the object
-        return self
+        return self :: any -- LUAU TYPE SOLVER ISSUE
     end
 
     --[=[
@@ -142,8 +142,8 @@ do
     function Aimwork.Iterate(self: Aimwork)
         -- // Reset Selected
         if self.Selected then
-            for i, v in pairs(DefaultSelected) do
-                self.Selected[i] = v
+            for i, v in pairs(DefaultSelected :: any) do -- LUAU TYPE SOLVER ISSUE
+                (self.Selected :: any)[i] = v -- LUAU TYPE SOLVER ISSUE
             end
         else
             self.Selected = table.clone(DefaultSelected)

@@ -64,16 +64,15 @@ do
     ]=]
     function PlayerObject.new(Player: Player): PlayerObject
         -- // Create the object
-        local self = setmetatable({}, PlayerObject)
-
-        -- // Set properties
-        self.Instance = Player
-        self.Trove = TroveBuilder.new()
-
-        self.BodyParts = {}
-        self.Health = 0
-        self.Friend = LocalPlayer:IsFriendsWith(Player.UserId)
-        self.ForceField = false
+        local self: PlayerObjectData = {
+            Instance = Player,
+            Trove = TroveBuilder.new(),
+            BodyParts = {},
+            Health = 0,
+            Friend = LocalPlayer:IsFriendsWith(Player.UserId),
+            ForceField = false,
+        }
+        self = setmetatable(self, PlayerObject)
 
         -- // Complete initialisation
         self:Initialise()

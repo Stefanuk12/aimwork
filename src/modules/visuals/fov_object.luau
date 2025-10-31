@@ -12,7 +12,8 @@ local function IsPointInsideRect(Point: Vector2, Centre: Vector2, Size: Vector2)
     if Point.X >= TopLeft.X and Point.X <= BottomRight.X and Point.Y >= TopLeft.Y and Point.Y <= BottomRight.Y then
         return (Centre - Point).Magnitude
     end
-    return
+
+    return nil
 end
 
 -- //
@@ -164,13 +165,13 @@ do
         Applies all of the settings stored internally in `self.Drawing.Value` to the actual Drawing object, if it exists.
     ]=]
     function FOVObject.SetDrawingData(self: FOVObject)
-        local Object = self.Drawing.Value :: any?
+        local Object = self.Drawing.Value
         if not Object then
             return
         end
-
-        for i, v in pairs(self.Drawing.Data) do
-            Object[i] = v
+    
+        for i, v in pairs(self.Drawing.Data :: any) do -- LUAU TYPE SOLVER ISSUE
+            (Object :: any)[i] = v -- LUAU TYPE SOLVER ISSUE
         end
     end
 
@@ -259,7 +260,7 @@ do
                 return (Centre - Position).Magnitude
             end
         end
-        return
+        return nil
     end
 end
 

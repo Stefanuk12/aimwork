@@ -25,7 +25,7 @@ do
 
         @tag constructor
     ]=]
-    function VisualHandler.new()
+    function VisualHandler.new(): VisualHandler
         -- // Create the object
         local self = setmetatable({}, VisualHandler)
 
