@@ -24,11 +24,6 @@ local localPlayer = Players.LocalPlayer
     Used internally to track the status of all [Player]s
 ]=]
 --[=[
-    @prop fov FovObject
-    @within Checks
-    Holds all FOV-related data, including methods that help with checking if a [Vector2] point in inside of the FOV.
-]=]
---[=[
     @prop configuration Configuration
     @within Checks
     Contains the entire configuration, however, only certain parts are used.
