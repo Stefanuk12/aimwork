@@ -1,16 +1,16 @@
--- // Dependencies
+-- Dependencies
 local AimworkChecks = require("@modules/checks")
 local AimworkTypes = require("@types/aimwork")
 local AimworkSelectedType = require("@types/selected")
 local PlayerObjectTypes = require("@modules/player/object")
 local VisualHandlerTypes = require("@modules/visuals")
 
--- //
+--
 local PlayerCheck = AimworkChecks.PlayerCheck
 local PartChecks = AimworkChecks.PartChecks
 type PlayerObject = PlayerObjectTypes.PlayerObject
 
--- //
+--
 return function(Aimwork: AimworkTypes.Aimwork)
     function Aimwork.Checks:PlayerCheck(Player: PlayerObject)
         if false then -- some condition

@@ -1,13 +1,13 @@
--- // Dependencies
+-- Dependencies
 local TroveBuilder = require("@pkgs/trove")
 
--- // Services
+-- Services
 local Players = game:GetService("Players")
 
--- // Vars
+-- Vars
 local LocalPlayer = Players.LocalPlayer
 
--- //
+--
 --[=[
     @class PlayerObject
 
@@ -63,7 +63,7 @@ do
         @tag constructor
     ]=]
     function PlayerObject.new(Player: Player): PlayerObject
-        -- // Create the object
+        -- Create the object
         local self: PlayerObjectData = {
             Instance = Player,
             Trove = TroveBuilder.new(),
@@ -74,10 +74,10 @@ do
         }
         self = setmetatable(self, PlayerObject)
 
-        -- // Complete initialisation
+        -- Complete initialisation
         self:Initialise()
 
-        -- // Return the object
+        -- Return the object
         return self
     end
 
@@ -172,5 +172,5 @@ do
     end
 end
 
--- //
+--
 return PlayerObject

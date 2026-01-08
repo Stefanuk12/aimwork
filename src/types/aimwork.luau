@@ -1,4 +1,4 @@
--- // Dependencies
+-- Dependencies
 local Configuration = require("@core/config")
 
 local AimworkChecksType = require("@modules/checks")
@@ -7,7 +7,7 @@ local AimworkSelectedType = require("@types/selected")
 local PlayerObjectTypes = require("@modules/player/object")
 local VisualHandler = require("@modules/visuals")
 
--- // Types
+-- Types
 export type AimworkData = {
     Trove: any,
     Checks: AimworkChecksType.Checks,
@@ -27,5 +27,5 @@ export type AimworkMethods = {
 export type AimworkAll = AimworkData & AimworkMethods
 export type Aimwork = typeof(setmetatable({} :: AimworkData, {} :: AimworkMethods))
 
--- //
+--
 return false

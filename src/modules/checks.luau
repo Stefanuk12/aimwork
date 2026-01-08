@@ -1,4 +1,4 @@
--- // Dependencies
+-- Dependencies
 local ConfigurationDef = require("@core/config")
 local Functions = require("@functions")
 local PlayerTracker = require("@modules/player/tracker")
@@ -6,14 +6,14 @@ local PlayerObjectTypes = require("@modules/player/object")
 local VisualHandlerTypes = require("@modules/visuals")
 local AimworkSelectedType = require("@types/selected")
 
--- // Services
+-- Services
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
 
--- // Vars
+-- Vars
 local LocalPlayer = Players.LocalPlayer
 
--- // Types
+-- Types
 type PlayerObject = PlayerObjectTypes.PlayerObject
 
 --[=[
@@ -51,14 +51,14 @@ do
         @tag constructor
     ]=]
     function Checks.new(Config: ConfigurationDef.Configuration): Checks
-        -- // Create the object
+        -- Create the object
         local self = setmetatable({}, Checks)
 
-        -- // Initialise properties
+        -- Initialise properties
         self.Configuration = Config
         self.PlayerTracker = PlayerTracker.new()
 
-        -- // Return the object
+        -- Return the object
         return self
     end
 

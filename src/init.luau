@@ -1,4 +1,4 @@
--- // Dependencies
+-- Dependencies
 local TroveBuilder = require("@pkgs/trove")
 local Patches = require("@patches")
 
@@ -14,11 +14,11 @@ local VisualHandler = require("@modules/visuals")
 
 local AimworkTypes = require("@types/aimwork")
 
--- // Services
+-- Services
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
--- // Vars
+-- Vars
 local LocalPlayer = Players.LocalPlayer
 local DefaultSelected: AimworkSelectedType.AimworkSelected = {
     Player = LocalPlayer,
@@ -27,7 +27,7 @@ local DefaultSelected: AimworkSelectedType.AimworkSelected = {
     Distance = math.huge,
 }
 
--- //
+--
 --[=[
     @class Aimwork
 
@@ -66,7 +66,7 @@ do
         @tag constructor
     ]=]
     function Aimwork.new(Settings: Configuration.Configuration): Aimwork
-        -- // Create the object
+        -- Create the object
         local self: AimworkTypes.AimworkData = {
             Trove = TroveBuilder.new(),
             Visuals = VisualHandler.new(),
@@ -78,7 +78,7 @@ do
 
         self.Visuals:Add(FOVObject.new("Main", Settings.FOVSettings) :: any)
 
-        -- // Return the object
+        -- Return the object
         return self :: any -- LUAU TYPE SOLVER ISSUE
     end
 
@@ -120,17 +120,17 @@ do
         @param Player PlayerObject
     ]=]
     function Aimwork.IteratePlayer(self: Aimwork, Player: PlayerObjectTypes.PlayerObject)
-        -- // Ignore our LocalPlayer
+        -- Ignore our LocalPlayer
         if Player.Instance == LocalPlayer then
             return
         end
 
-        -- // Perform initial Player checks, that we can do, based upon the Player alone
+        -- Perform initial Player checks, that we can do, based upon the Player alone
         if not self.Checks:PlayerCheck(Player) then
             return
         end
 
-        -- // Perform part checks
+        -- Perform part checks
         for _, v in ipairs(Player.BodyParts) do
             self.Checks:PartChecks(Player, v, self.Visuals.Objects, self.Selected :: any)
         end
@@ -140,7 +140,7 @@ do
         Processes all [PlayerObject]s inside of the [PlayerTracker].
     ]=]
     function Aimwork.Iterate(self: Aimwork)
-        -- // Reset Selected
+        -- Reset Selected
         if self.Selected then
             for i, v in pairs(DefaultSelected :: any) do -- LUAU TYPE SOLVER ISSUE
                 (self.Selected :: any)[i] = v -- LUAU TYPE SOLVER ISSUE
@@ -149,15 +149,15 @@ do
             self.Selected = table.clone(DefaultSelected)
         end
 
-        -- // Update FOV positions
+        -- Update FOV positions
         self.Visuals:Update()
 
-        -- // Iterate through all players
+        -- Iterate through all players
         for _, v in ipairs(self.Checks.PlayerTracker.Players) do
             self:IteratePlayer(v)
         end
     end
 end
 
--- //
+--
 return Aimwork

@@ -1,12 +1,12 @@
--- // Dependencies
+-- Dependencies
 local TroveBuilder = require("@pkgs/trove")
 local PlayerObject = require("./object")
 
--- // Services
+-- Services
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
 
--- //
+--
 --[=[
     @class PlayerTracker
 
@@ -31,17 +31,17 @@ do
         @tag constructor
     ]=]
     function PlayerTracker.new(): PlayerTracker
-        -- // Create the object
+        -- Create the object
         local self = setmetatable({}, PlayerTracker)
 
-        -- // Initialise properties
+        -- Initialise properties
         self.Trove = TroveBuilder.new()
         self.Players = {}
 
-        -- // Complete initialisation
+        -- Complete initialisation
         self:Initialise()
 
-        -- // Return the object
+        -- Return the object
         return self
     end
 
@@ -129,5 +129,5 @@ do
     end
 end
 
--- //
+--
 return PlayerTracker

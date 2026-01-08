@@ -1,11 +1,11 @@
--- // Dependencies
+-- Dependencies
 local DrawingTypes = require("@types/extra_drawing")
 local MergeTables = require("@functions/merge_tables")
 
--- // Services
+-- Services
 local UserInputService = game:GetService("UserInputService")
 
--- // Checks if the `Point` is inside of a rectangle.
+-- Checks if the `Point` is inside of a rectangle.
 local function IsPointInsideRect(Point: Vector2, Centre: Vector2, Size: Vector2): number?
     local TopLeft = Centre - Size / 2
     local BottomRight = Centre + Size / 2
@@ -16,7 +16,7 @@ local function IsPointInsideRect(Point: Vector2, Centre: Vector2, Size: Vector2)
     return nil
 end
 
--- //
+--
 --[=[
     @class FOVObject
 
@@ -127,10 +127,10 @@ do
         @tag constructor
     ]=]
     function FOVObject.new(Id: string, DrawingData: DrawingTypes.DrawingOptionalDataEnum): FOVObject
-        -- // Create the object
+        -- Create the object
         local self = setmetatable({}, FOVObject)
 
-        -- // Initialise properties
+        -- Initialise properties
         local Defaults = FOVDefaults[DrawingData.Kind]
         assert(Defaults, "could not find drawing defaults")
         Defaults = table.clone(Defaults)
@@ -141,10 +141,10 @@ do
             Value = nil,
         } :: any
 
-        -- // Create the drawing
+        -- Create the drawing
         self:CreateDrawing()
 
-        -- // Return the object
+        -- Return the object
         return self
     end
 
@@ -264,5 +264,5 @@ do
     end
 end
 
--- //
+--
 return FOVObject

@@ -1,10 +1,10 @@
--- // Dependencies
+-- Dependencies
 local AimworkTypes = require("@types/aimwork")
 
--- // Types
+-- Types
 export type Patch = (AimworkTypes.Aimwork) -> ()
 
--- // Load each patch in, with it's name
+-- Load each patch in, with it's name
 return {
     Example = require("./example"),
 } :: { [string]: Patch }

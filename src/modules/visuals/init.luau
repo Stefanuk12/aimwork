@@ -1,7 +1,7 @@
--- // Dependencies
+-- Dependencies
 local FOVObjectTypes = require("@modules/visuals/fov_object")
 
--- // Types
+-- Types
 export type AdditionalFOVData = {
     UpdateEnabled: boolean,
     CheckEnabled: boolean,
@@ -26,13 +26,13 @@ do
         @tag constructor
     ]=]
     function VisualHandler.new(): VisualHandler
-        -- // Create the object
+        -- Create the object
         local self = setmetatable({}, VisualHandler)
 
-        -- // Initialise properties
+        -- Initialise properties
         self.Objects = {}
 
-        -- // Return the object
+        -- Return the object
         return self
     end
 
@@ -99,5 +99,5 @@ do
     end
 end
 
--- //
+--
 return VisualHandler

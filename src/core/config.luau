@@ -1,8 +1,8 @@
--- // Dependencies
+-- Dependencies
 local DrawingTypes = require("@types/extra_drawing")
 local PlayerObjectTypes = require("@modules/player/object")
 
--- //
+--
 export type Configuration = {
     Checks: {
         ForceField: boolean,
