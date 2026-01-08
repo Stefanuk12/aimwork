@@ -1,5 +1,5 @@
 -- Dependencies
-local Aimwork = require("./init")
+local Aimwork = require("@self")
 local Configuration = require("@core/config")
 local mergeTables = require("@functions/mergeTables")
 
