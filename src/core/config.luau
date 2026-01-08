@@ -1,6 +1,6 @@
 -- Dependencies
 local DrawingTypes = require("@types/extra_drawing")
-local PlayerObjectTypes = require("@modules/player/object")
+local PlayerObjectTypes = require("@modules/PlayerTracker/PlayerObject")
 
 --
 export type Configuration = {
@@ -57,14 +57,14 @@ local Configuration: Configuration = {
         Teams = {},
         Players = {},
     },
-    RaycastIgnore = function(Player: PlayerObjectTypes.PlayerObject, Camera: Camera)
-        local Ignored: { Instance } = { Camera }
+    RaycastIgnore = function(player: PlayerObjectTypes.PlayerObject, camera: Camera)
+        local ignored: { Instance } = { camera }
 
-        if Player.Character then
-            table.insert(Ignored, Player.Character)
+        if player.character then
+            table.insert(ignored, player.character)
         end
 
-        return Ignored
+        return ignored
     end,
 }
 

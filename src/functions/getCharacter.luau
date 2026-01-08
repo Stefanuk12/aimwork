@@ -1,11 +1,12 @@
 --[=[
     Returns the Character associated with a `Player`
 
-    @function GetCharacter
+    @function getCharacter
     @within Functions
-    @param Player Player
+    @param player Player
     @return Model?
 ]=]
-return function(Player: Player)
+local function getCharacter(Player: Player)
     return Player.Character
 end
+return getCharacter

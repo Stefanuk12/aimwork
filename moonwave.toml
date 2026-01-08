@@ -11,7 +11,7 @@ classOrder = [
     "Aimwork",
     "PlayerTracker",
     "PlayerObject",
-    "FOVObject",
+    "FovObject",
     "Checks",
     "Functions"
 ]

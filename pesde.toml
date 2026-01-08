@@ -4,10 +4,10 @@ version = "0.1.0"
 authors = ["Stefanuk12"]
 license = "MIT"
 includes = [
-    "pesde.toml",
-    "README.md",
-    "LICENSE",
-    "src/*"
+  "pesde.toml",
+  "README.md",
+  "LICENSE",
+  "src/*"
 ]
 
 [engines]
@@ -18,6 +18,10 @@ lune = "=0.10.4"
 build_files = ["src"]
 environment = "roblox"
 lib = "src/init.luau"
+
+[scripts]
+roblox_sync_config_generator = ".pesde/scripts/roblox_sync_config_generator.luau"
+sourcemap_generator = ".pesde/scripts/sourcemap_generator.luau"
 
 [indices]
 default = "https://github.com/pesde-pkg/index"

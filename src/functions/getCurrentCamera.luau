@@ -4,10 +4,11 @@ local Workspace = game:GetService("Workspace")
 --[=[
     Returns the `CurrentCamera`
 
-    @function GetCurrentCamera
+    @function getCurrentCamera
     @within Functions
     @return Camera
 ]=]
-return function()
+local function getCurrentCamera()
     return Workspace.CurrentCamera
 end
+return getCurrentCamera
