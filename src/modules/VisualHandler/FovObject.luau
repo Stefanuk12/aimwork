@@ -120,18 +120,18 @@ export type FovObject = setmetatable<FovObjectData, typeof(FovObject)>
 
     @tag constructor
 ]=]
-function FovObject.new(Id: string, DrawingData: DrawingTypes.DrawingOptionalDataEnum): FovObject
+function FovObject.new(id: string, drawingData: DrawingTypes.DrawingOptionalDataEnum): FovObject
     -- Initialise properties
-    local defaults = (fovDefaults :: any)[DrawingData.Kind]
+    local defaults = (fovDefaults :: any)[drawingData.Kind]
     assert(defaults, "could not find drawing defaults")
     defaults = table.clone(defaults)
 
     -- Create the object
     local self: FovObjectData = {
-        id = Id,
+        id = id,
         drawing = {
-            Kind = DrawingData.Kind,
-            Data = mergeTables(defaults, DrawingData.Value),
+            Kind = drawingData.Kind,
+            Data = mergeTables(defaults, drawingData.Value),
             Value = nil,
         } :: any,
     }

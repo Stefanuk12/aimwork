@@ -95,9 +95,9 @@ end
 
     @return (number?, PlayerObject?) -- The index and value of the [PlayerObject] inside of [PlayerTracker.Players], if it exists.
 ]=]
-function PlayerTracker.GetFromInstance(self: PlayerTracker, Player: Player): (number?, PlayerObject.PlayerObject?)
+function PlayerTracker.GetFromInstance(self: PlayerTracker, playerInstance: Player): (number?, PlayerObject.PlayerObject?)
     for i, player in ipairs(self.players) do
-        if player.instance == Player then
+        if player.instance == playerInstance then
             return i, player
         end
     end

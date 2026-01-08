@@ -4,16 +4,16 @@ gitSourceBranch = "master"
 changelog = true
 
 apiCategories = [
-    "constructor",
-    "destructor",
+  "constructor",
+  "destructor",
 ]
 classOrder = [
-    "Aimwork",
-    "PlayerTracker",
-    "PlayerObject",
-    "FovObject",
-    "Checks",
-    "Functions"
+  "Aimwork",
+  "PlayerTracker",
+  "PlayerObject",
+  "FovObject",
+  "Checks",
+  "Functions"
 ]
 
 [home]
