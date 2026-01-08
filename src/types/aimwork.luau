@@ -15,7 +15,7 @@ export type AimworkData = {
     checks: AimworkChecksType.Checks,
     visuals: VisualHandler.VisualHandler,
     settings: Configuration.Configuration,
-    selected: AimworkSelectedType.AimworkSelected?,
+    selected: AimworkSelectedType.AimworkSelected,
 }
 export type AimworkObject = {
     __index: AimworkObject,

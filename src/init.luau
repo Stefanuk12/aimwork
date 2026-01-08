@@ -67,7 +67,7 @@ function Aimwork.new(settings: Configuration.Configuration): Aimwork
         visuals = trove:Add(VisualHandler.new()),
         checks = trove:Add(AimworkChecks.new(settings)),
         settings = settings,
-        selected = nil,
+        selected = table.clone(defaultSelected :: any),
     }
     return setmetatable(self, Aimwork)
 end
@@ -131,12 +131,8 @@ end
 ]=]
 function Aimwork.Iterate(self: Aimwork)
     -- Reset Selected
-    if self.selected then
-        for i, v in defaultSelected :: any do -- LUAU TYPE SOLVER ISSUE
-            (self.selected :: any)[i] = v -- LUAU TYPE SOLVER ISSUE
-        end
-    else
-        self.selected = table.clone(defaultSelected)
+    for i, v in defaultSelected :: any do -- LUAU TYPE SOLVER ISSUE
+        (self.selected :: any)[i] = v -- LUAU TYPE SOLVER ISSUE
     end
 
     -- Update FOV positions
