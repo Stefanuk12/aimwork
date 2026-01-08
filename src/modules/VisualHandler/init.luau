@@ -63,7 +63,8 @@ end
 --[=[
     Check all objects.
 ]=]
-function VisualHandler.Check(self: VisualHandler, position: Vector2, fetchAll: boolean): { [string]: number? } | boolean
+function VisualHandler.Check(self: VisualHandler, position: Vector2, fetchAll: boolean)
+    local allSuccess = true
     local results = {}
 
     for fovObject, data in pairs(self.objects) do
@@ -72,14 +73,18 @@ function VisualHandler.Check(self: VisualHandler, position: Vector2, fetchAll: b
         end
 
         local result = fovObject:InsideFOV(position)
-        if not fetchAll and not result then
-            return false
+        if not result then
+            allSuccess = false
+
+            if not fetchAll then
+                return {}, false
+            end
         end
 
         results[fovObject.id] = result
     end
 
-    return results
+    return results, allSuccess
 end
 
 --[=[
