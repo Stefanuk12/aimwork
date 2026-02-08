@@ -229,22 +229,24 @@ function Checks.PartChecks(
     end
 
     local screen2D = Vector2.new(screenPosition.X, screenPosition.Y)
-    local distance
+    local distance = selected.distance
     for fov, data in pairs(fovs) do
         if not data.check then
             continue
         end
 
-        distance = fov:InsideFOV(screen2D)
+        local _insideFov, distanceToFov = fov:InsideFOV(screen2D)
         if
-            (not distance or distance < selected.distance)
+            ((distanceToFov or math.huge) > distance)
             or (
                 configuration.WallCheck == "Full"
                 and self:WallHit(player, part, player.character :: any, currentCamera)
             )
         then
-            return
+            continue
         end
+
+        distance = distanceToFov
     end
 
     if not distance then

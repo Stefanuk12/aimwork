@@ -205,7 +205,7 @@ end
 
     @return number? -- The distance from the centre of the FOV
 ]=]
-function FovObject.InsideFOV(self: FovObject, position: Vector2): number?
+function FovObject.InsideFOV(self: FovObject, position: Vector2): (boolean, number?)
     local drawing = self.drawing
 
     if drawing.Kind == "Line" then
@@ -215,14 +215,12 @@ function FovObject.InsideFOV(self: FovObject, position: Vector2): number?
         local projection = pointDirection:Dot(lineDirection.Unit)
 
         if not (projection >= 0 and projection <= lineDirection.Magnitude) then
-            return nil
+            return false, nil
         end
 
         local closestPoint = drawingData.From + lineDirection.Unit * projection
         local distance = (closestPoint - position).Magnitude
-        if distance <= drawingData.Thickness / 2 then
-            return distance
-        end
+        return distance <= drawingData.Thickness / 2, distance
     elseif drawing.Kind == "Text" then
         local drawingData = drawing.Data
         return isPointInsideRect(position, drawingData.Position, drawingData.TextBounds)
@@ -233,9 +231,7 @@ function FovObject.InsideFOV(self: FovObject, position: Vector2): number?
         local drawingData = drawing.Data
         local distance = (drawingData.Position - position).Magnitude
 
-        if distance < drawingData.Radius then
-            return distance
-        end
+        return distance < drawingData.Radius, distance
     elseif drawing.Kind == "Quad" then
         local drawingData = drawing.Data
         local points = { drawingData.PointA, drawingData.PointB, drawingData.PointC, drawingData.PointD }
@@ -254,9 +250,7 @@ function FovObject.InsideFOV(self: FovObject, position: Vector2): number?
             end
         end
 
-        if isInside then
-            return (centre - position).Magnitude
-        end
+        return isInside, (centre - position).Magnitude
     elseif drawing.Kind == "Triangle" then
         local drawingData = drawing.Data
         local points = { drawingData.PointA, drawingData.PointB, drawingData.PointC }
@@ -275,12 +269,10 @@ function FovObject.InsideFOV(self: FovObject, position: Vector2): number?
             end
         end
 
-        if isInside then
-            return (centre - position).Magnitude
-        end
+        return isInside, (centre - position).Magnitude
     end
 
-    return nil
+    return false, nil
 end
 
 return FovObject
