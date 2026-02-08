@@ -1,5 +1,5 @@
 -- Dependencies
-local TroveBuilder = require("@pkgs/trove")
+local Trove = require("@pkgs/trove")
 local patches = require("@patches")
 local Configuration = require("@core/config")
 local AimworkChecks = require("@modules/checks")
@@ -60,7 +60,7 @@ type Aimwork = AimworkTypes.Aimwork
     @tag constructor
 ]=]
 function Aimwork.new(settings: Configuration.Configuration): Aimwork
-    local trove = TroveBuilder.new()
+    local trove = Trove.new()
     local self: AimworkTypes.AimworkData = {
         _trove = trove,
 

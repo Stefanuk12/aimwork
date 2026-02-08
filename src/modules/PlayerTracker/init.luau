@@ -1,5 +1,5 @@
 -- Dependencies
-local TroveBuilder = require("@pkgs/trove")
+local Trove = require("@pkgs/trove")
 local PlayerObject = require("@self/PlayerObject")
 
 -- Services
@@ -21,7 +21,7 @@ PlayerTracker.__index = PlayerTracker
 
 -- Types
 export type PlayerTrackerData = {
-    _trove: any,
+    _trove: Trove.Trove,
     players: { PlayerObject.PlayerObject },
 }
 export type PlayerTracker = setmetatable<PlayerTrackerData, typeof(PlayerTracker)>
@@ -34,7 +34,7 @@ export type PlayerTracker = setmetatable<PlayerTrackerData, typeof(PlayerTracker
 function PlayerTracker.new(): PlayerTracker
     -- Create the object
     local self: PlayerTrackerData = {
-        _trove = TroveBuilder.new(),
+        _trove = Trove.new(),
         players = {},
     }
     self = setmetatable(self, PlayerTracker)

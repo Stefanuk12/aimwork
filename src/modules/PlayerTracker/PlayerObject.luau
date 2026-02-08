@@ -47,7 +47,7 @@ PlayerObject.__index = PlayerObject
 
 -- Types
 export type PlayerObjectData = {
-    _trove: any,
+    _trove: Trove.Trove,
 
     instance: Player,
     character: Model?,
