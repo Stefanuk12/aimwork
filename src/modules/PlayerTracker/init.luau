@@ -61,7 +61,7 @@ function PlayerTracker.Initialise(self: PlayerTracker)
     trove:Connect(Players.PlayerRemoving, function(Player: Player)
         self:OnPlayerRemoved(Player)
     end)
-    trove:Connect(StarterGui:GetCore("PlayerFriendedEvent"), function(Player: Player)
+    trove:Connect(StarterGui:GetCore("PlayerFriendedEvent").Event, function(Player: Player)
         local _, player = self:GetFromInstance(Player)
         if not player then
             return
@@ -69,7 +69,7 @@ function PlayerTracker.Initialise(self: PlayerTracker)
 
         player.friend = true
     end)
-    trove:Connect(StarterGui:GetCore("PlayerUnfriendedEvent"), function(Player: Player)
+    trove:Connect(StarterGui:GetCore("PlayerUnfriendedEvent").Event, function(Player: Player)
         local _, player = self:GetFromInstance(Player)
         if not player then
             return
