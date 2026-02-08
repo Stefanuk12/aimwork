@@ -170,14 +170,13 @@ end
 ]=]
 function Checks.WallHit(
     self: Checks,
-    player: PlayerObject,
     part: BasePart,
     partAncestor: Instance,
     currentCamera: Camera
 )
     local raycastParams = RaycastParams.new()
     raycastParams.FilterType = Enum.RaycastFilterType.Exclude
-    raycastParams.FilterDescendantsInstances = self.configuration.RaycastIgnore(player, currentCamera)
+    raycastParams.FilterDescendantsInstances = self.configuration.RaycastIgnore(self.playerTracker.localPlayer, currentCamera)
 
     local origin = currentCamera.CFrame.Position
     local direction = part.Position - origin
@@ -187,6 +186,7 @@ function Checks.WallHit(
     end
 
     local partHit = raycastResult.Instance
+    print(partHit:GetFullName())
     return partHit ~= part or not partAncestor:IsAncestorOf(partHit)
 end
 
@@ -241,7 +241,7 @@ function Checks.PartChecks(
             ((distanceToFov or math.huge) > distance)
             or (
                 configuration.WallCheck == "Full"
-                and self:WallHit(player, part, player.character :: any, currentCamera)
+                and self:WallHit(part, player.character :: any, currentCamera)
             )
         then
             continue
