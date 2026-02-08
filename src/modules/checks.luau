@@ -168,15 +168,11 @@ end
 
     @param partAncestor Instance -- Used to ensure the `Part` hit is apart of the `Player`
 ]=]
-function Checks.WallHit(
-    self: Checks,
-    part: BasePart,
-    partAncestor: Instance,
-    currentCamera: Camera
-)
+function Checks.WallHit(self: Checks, part: BasePart, partAncestor: Instance, currentCamera: Camera)
     local raycastParams = RaycastParams.new()
     raycastParams.FilterType = Enum.RaycastFilterType.Exclude
-    raycastParams.FilterDescendantsInstances = self.configuration.RaycastIgnore(self.playerTracker.localPlayer, currentCamera)
+    raycastParams.FilterDescendantsInstances =
+        self.configuration.RaycastIgnore(self.playerTracker.localPlayer, currentCamera)
 
     local origin = currentCamera.CFrame.Position
     local direction = part.Position - origin
@@ -237,12 +233,9 @@ function Checks.PartChecks(
 
         local insideFov, distanceToFov = fov:InsideFOV(screen2D)
         if
-            not insideFov or
-            ((distanceToFov or math.huge) > distance)
-            or (
-                configuration.WallCheck == "Full"
-                and self:WallHit(part, player.character :: any, currentCamera)
-            )
+            not insideFov
+            or ((distanceToFov or math.huge) > distance)
+            or (configuration.WallCheck == "Full" and self:WallHit(part, player.character :: any, currentCamera))
         then
             continue
         end
