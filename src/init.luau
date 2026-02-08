@@ -52,7 +52,7 @@ Aimwork.DefaultConfiguration = Configuration
 Aimwork.__index = Aimwork
 
 -- Types
-type Aimwork = AimworkTypes.Aimwork
+export type Aimwork = AimworkTypes.Aimwork
 
 --[=[
     Constructs a new [PlayerObject].
