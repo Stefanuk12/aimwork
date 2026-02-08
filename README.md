@@ -1,7 +1,7 @@
 <div align="center">
-	<h1>Aimwork</h1>
-	<p>An <b>optimised</b> library for anything Roblox aim hacks related.</p>
-	<a href="https://stefanuk12.github.io/aimwork"><strong>View docs</strong></a>
+  <h1>Aimwork</h1>
+  <p>An <b>optimised</b> library for anything Roblox aim hacks related.</p>
+  <a href="https://stefanuk12.github.io/aimwork"><strong>View docs</strong></a>
 </div>
 <!--moonwave-hide-before-this-line-->
 

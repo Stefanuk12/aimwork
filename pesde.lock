@@ -67,19 +67,19 @@ index_url = "https://github.com/pesde-pkg/index"
 ref_ty = "pesde"
 index_url = "https://github.com/pesde-pkg/index"
 
-[graph."pesde/luau_lsp@1.60.0 lune"]
-direct = ["luau_lsp", { name = "pesde/luau_lsp", version = "^1.55.0", index = "default", target = "lune" }, "dev"]
+[graph."pesde/luau_lsp@1.61.0 lune"]
+direct = ["luau_lsp", { name = "pesde/luau_lsp", version = "^1.61.0", index = "default", target = "lune" }, "dev"]
 
-[graph."pesde/luau_lsp@1.60.0 lune".dependencies]
+[graph."pesde/luau_lsp@1.61.0 lune".dependencies]
 option = ["lukadev_0/option@1.2.1 lune", "standard"]
 result = ["lukadev_0/result@1.2.1 lune", "standard"]
 toolchainlib = ["pesde/toolchainlib@0.2.2 lune", "standard"]
 
-[graph."pesde/luau_lsp@1.60.0 lune".pkg_ref]
+[graph."pesde/luau_lsp@1.61.0 lune".pkg_ref]
 ref_ty = "pesde"
 index_url = "https://github.com/pesde-pkg/index"
 
-[graph."pesde/luau_lsp@1.60.0 lune".pkg_ref.dependencies]
+[graph."pesde/luau_lsp@1.61.0 lune".pkg_ref.dependencies]
 option = [{ name = "lukadev_0/option", version = "^1.2.1", index = "https://github.com/pesde-pkg/index" }, "standard"]
 result = [{ name = "lukadev_0/result", version = "^1.2.1", index = "https://github.com/pesde-pkg/index" }, "standard"]
 toolchainlib = [{ name = "pesde/toolchainlib", version = "^0.2.2", index = "https://github.com/pesde-pkg/index", target = "lune" }, "standard"]
@@ -200,12 +200,12 @@ result = [{ name = "lukadev_0/result", version = "^1.2.1", index = "https://gith
 toolchainlib = [{ name = "pesde/toolchainlib", version = "^0.2.0", index = "https://github.com/pesde-pkg/index" }, "standard"]
 
 [graph."stefanuk12/luau_defs@0.2.4 luau"]
-direct = ["luau_defs", { repo = "https://github.com/rocult/luau-defs", rev = "85a3e2b2d6bd0bbdaadf334873f65c563f959191" }, "dev"]
+direct = ["luau_defs", { repo = "https://github.com/rocult/luau-defs", rev = "e628aec6fabb5acfd28f1bc6a18a1c7950122d2c" }, "dev"]
 
 [graph."stefanuk12/luau_defs@0.2.4 luau".pkg_ref]
 ref_ty = "git"
 repo = "https://github.com/rocult/luau-defs"
-tree_id = "93ed34492b90d06dab473c03c223f6dbba9a1926"
+tree_id = "b6c9a4f4713febab292be90d4938cf6d83caf394"
 new_structure = true
 
 [graph."wally#sleitnick/trove@1.8.0 roblox"]
