@@ -93,12 +93,12 @@ function PlayerObject.Initialise(self: PlayerObject)
 
     self:OnCharacterAdded(self.instance.Character)
 
-    trove:Add(self.instance.CharacterAdded:Connect(function(Character)
+    trove:Connect(self.instance.CharacterAdded, function(Character: Model)
         self:OnCharacterAdded(Character)
-    end))
-    trove:Add(self.instance.CharacterRemoving:Connect(function(Character)
+    end)
+    trove:Connect(self.instance.CharacterRemoving, function(Character: Model)
         self:OnCharacterRemoved(Character)
-    end))
+    end)
 end
 
 --[=[
@@ -119,9 +119,9 @@ function PlayerObject.OnChildAdded(self: PlayerObject, child: Instance)
     if child:IsA("BasePart") then
         table.insert(self.bodyParts, child)
     elseif child:IsA("Humanoid") then
-        self._trove:Add(child.HealthChanged:Connect(function(Health)
+        self._trove:Connect(child.HealthChanged, function(Health: number)
             self.health = Health
-        end))
+        end)
     elseif child:IsA("ForceField") then
         self.forceField = true
     end
@@ -157,12 +157,12 @@ function PlayerObject.OnCharacterAdded(self: PlayerObject, character: Model?)
     end
 
     local trove = self._trove
-    trove:Add(character.ChildAdded:Connect(function(Child)
+    trove:Connect(character.ChildAdded, function(Child: Instance)
         self:OnChildAdded(Child)
-    end))
-    trove:Add(character.ChildRemoved:Connect(function(Child)
+    end)
+    trove:Connect(character.ChildRemoved, function(Child: Instance)
         self:OnChildRemoved(Child)
-    end))
+    end)
 end
 
 --[=[

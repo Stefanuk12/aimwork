@@ -90,9 +90,9 @@ function Aimwork.Initialise(self: Aimwork)
     local trove = self._trove
 
     self.visuals:Add(FovObject.new("Main", self.settings.FOVSettings))
-    trove:Add(RunService.Heartbeat:Connect(function()
+    trove:Connect(RunService.Heartbeat, function()
         self:Iterate()
-    end))
+    end)
 end
 
 --[=[
