@@ -1,4 +1,5 @@
 -- Dependencies
+local Trove = require("@pkgs/trove")
 local FovObjectTypes = require("@self/FovObject")
 
 --[=[
@@ -17,6 +18,7 @@ export type AdditionalFOVData = {
 export type FOVPrimative = FovObjectTypes.FovObject
 
 export type VisualHandlerData = {
+    _trove: Trove.Trove,
     objects: { [FOVPrimative]: AdditionalFOVData },
 }
 export type VisualHandler = setmetatable<VisualHandlerData, typeof(VisualHandler)>
@@ -28,6 +30,7 @@ export type VisualHandler = setmetatable<VisualHandlerData, typeof(VisualHandler
 ]=]
 function VisualHandler.new(): VisualHandler
     local self: VisualHandlerData = {
+        _trove = Trove.new(),
         objects = {},
     }
     return setmetatable(self, VisualHandler)
@@ -45,6 +48,8 @@ function VisualHandler.Add(self: VisualHandler, fovObject: FOVPrimative, data: A
         update = true,
         check = true,
     }
+
+    self._trove:Add(fovObject)
 
     return true
 end
@@ -93,6 +98,7 @@ end
     @tag destructor
 ]=]
 function VisualHandler.Destroy(self: VisualHandler)
+    self._trove:Destroy()
     setmetatable(self :: any, nil)
 end
 

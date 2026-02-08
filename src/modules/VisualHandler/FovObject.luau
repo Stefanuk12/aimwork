@@ -145,6 +145,18 @@ function FovObject.new(id: string, drawingData: DrawingTypes.DrawingOptionalData
 end
 
 --[=[
+    Destroy this object, and clean up.
+
+    @tag destructor
+]=]
+function FovObject.Destroy(self: FovObject)
+    local object = self.drawing.Value
+    if object then
+        object:Remove()
+    end
+end
+
+--[=[
     Used during [FovObject.new] to create the [Drawing] object, if the library is available.
 ]=]
 function FovObject.CreateDrawing(self: FovObject)
