@@ -235,8 +235,9 @@ function Checks.PartChecks(
             continue
         end
 
-        local _insideFov, distanceToFov = fov:InsideFOV(screen2D)
+        local insideFov, distanceToFov = fov:InsideFOV(screen2D)
         if
+            not insideFov or
             ((distanceToFov or math.huge) > distance)
             or (
                 configuration.WallCheck == "Full"
@@ -249,7 +250,7 @@ function Checks.PartChecks(
         distance = distanceToFov
     end
 
-    if not distance then
+    if not distance or distance == math.huge then
         return
     end
 
