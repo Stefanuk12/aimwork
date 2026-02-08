@@ -6,15 +6,23 @@ local PlayerObject = require("@self/PlayerObject")
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
 
+-- Vars
+local LocalPlayer = Players.LocalPlayer
+
 --[=[
     @class PlayerTracker
 
     Tracks all [Player]s in the game via [PlayerObject].
 ]=]
 --[=[
+    @prop localPlayer PlayerObject
+    @within PlayerTracker
+    The [PlayerObject] associated with the LocalPlayer.
+]=]
+--[=[
     @prop players { PlayerObject }
     @within PlayerTracker
-    All the associated [PlayerObject]s that are being tracked.
+    All the associated [PlayerObject]s that are being tracked, minus the LocalPlayer.
 ]=]
 local PlayerTracker = {}
 PlayerTracker.__index = PlayerTracker
@@ -22,6 +30,7 @@ PlayerTracker.__index = PlayerTracker
 -- Types
 export type PlayerTrackerData = {
     _trove: Trove.Trove,
+    localPlayer: PlayerObject.PlayerObject,
     players: { PlayerObject.PlayerObject },
 }
 export type PlayerTracker = setmetatable<PlayerTrackerData, typeof(PlayerTracker)>
@@ -35,6 +44,7 @@ function PlayerTracker.new(): PlayerTracker
     -- Create the object
     local self: PlayerTrackerData = {
         _trove = Trove.new(),
+        localPlayer = PlayerObject.new(LocalPlayer),
         players = {},
     }
     self = setmetatable(self, PlayerTracker)
@@ -112,7 +122,7 @@ end
     Ran when a new [Player] joins the game. It starts tracking them and adds them to [PlayerTracker.Players].
 ]=]
 function PlayerTracker.OnPlayerAdded(self: PlayerTracker, playerInstance: Player)
-    if self:GetFromInstance(playerInstance) then
+    if playerInstance == LocalPlayer or self:GetFromInstance(playerInstance) then
         return
     end
 
