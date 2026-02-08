@@ -7,18 +7,20 @@ local PlayerObjectTypes = require("@modules/PlayerTracker/PlayerObject")
 local VisualHandler = require("@modules/VisualHandler")
 local FovObject = require("@modules/VisualHandler/FovObject")
 local AimworkTypes = require("@types/aimwork")
+local AimworkSelectedTypes = require("@self/types/selected")
 
 -- Services
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
+
 -- Vars
 local localPlayer = Players.LocalPlayer
-local defaultSelected = table.freeze({
-    Player = localPlayer,
-    Part = Instance.new("Part"),
-    Position = Vector3.zero,
-    Distance = math.huge,
+local defaultSelected: typeof(table.freeze({} :: AimworkSelectedTypes.AimworkSelected)) = table.freeze({
+    player = localPlayer,
+    part = Instance.new("Part"),
+    position = Vector3.zero,
+    distance = math.huge,
 })
 
 --[=[
@@ -67,7 +69,7 @@ function Aimwork.new(settings: Configuration.Configuration): Aimwork
         visuals = trove:Add(VisualHandler.new()),
         checks = trove:Add(AimworkChecks.new(settings)),
         settings = settings,
-        selected = table.clone(defaultSelected :: any),
+        selected = table.clone(defaultSelected) :: AimworkSelectedTypes.AimworkSelected,
     }
     return setmetatable(self, Aimwork)
 end
@@ -122,7 +124,7 @@ function Aimwork.IteratePlayer(self: Aimwork, player: PlayerObjectTypes.PlayerOb
 
     -- Perform part checks
     for _, bodyPart in ipairs(player.bodyParts) do
-        self.checks:PartChecks(player, bodyPart, self.visuals.objects, self.selected :: any)
+        self.checks:PartChecks(player, bodyPart, self.visuals.objects, self.selected)
     end
 end
 
