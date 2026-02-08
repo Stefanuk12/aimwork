@@ -1,4 +1,4 @@
-exclude = ["*_packages/*"]
+exclude = ["*_packages/*", "src/main_test.luau"]
 std = "roblox"
 
 [lints]

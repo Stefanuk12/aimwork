@@ -13,7 +13,6 @@ local AimworkSelectedTypes = require("@self/types/selected")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
-
 -- Vars
 local localPlayer = Players.LocalPlayer
 local defaultSelected: typeof(table.freeze({} :: AimworkSelectedTypes.AimworkSelected)) = table.freeze({

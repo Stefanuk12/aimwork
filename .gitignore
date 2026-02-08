@@ -3,3 +3,4 @@ dist.luau
 dist.lua
 .pesde
 .meta/sourcemap.json
+src/main_test.luau
