@@ -7,7 +7,9 @@ local PlayerObjectTypes = require("@modules/PlayerTracker/PlayerObject")
 local VisualHandler = require("@modules/VisualHandler")
 local FovObject = require("@modules/VisualHandler/FovObject")
 local AimworkTypes = require("@types/aimwork")
-local AimworkSelectedTypes = require("@self/types/selected")
+local AimworkSelectedTypes = require("@types/selected")
+local DrawingTypes = require("@types/extra_drawing")
+local FovObjectLike = require("@types/fov_object_like")
 
 -- Services
 local Players = game:GetService("Players")
@@ -90,10 +92,25 @@ end
 function Aimwork.Initialise(self: Aimwork)
     local trove = self._trove
 
-    self.visuals:Add(FovObject.new("Main", self.settings.FOVSettings))
     trove:Connect(RunService.Heartbeat, function()
         self:Iterate()
     end)
+end
+
+--[=[
+    Register a basic Drawing FOV.
+]=]
+function Aimwork.RegisterFov(self: Aimwork, flag: string, data: DrawingTypes.DrawingOptionalDataEnum)
+    local fovObject = FovObject.new(flag, data)
+    self.visuals:Add(fovObject)
+    return fovObject
+end
+
+--[=[
+    Register a custom FOV object.
+]=]
+function Aimwork.RegisterCustomFov(self: Aimwork, object: FovObjectLike.FovObjectLike)
+    self.visuals:Add(object)
 end
 
 --[=[

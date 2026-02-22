@@ -4,10 +4,12 @@ local PlayerTracker = require("@modules/PlayerTracker")
 local PlayerObjectTypes = require("@modules/PlayerTracker/PlayerObject")
 local VisualHandlerTypes = require("@modules/VisualHandler")
 local getCurrentCamera = require("@functions/getCurrentCamera")
+local FovObjectLike = require("@types/fov_object_like")
 local AimworkSelectedType = require("@types/selected")
 
 -- Services
 local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
 local Workspace = game:GetService("Workspace")
 
 -- Vars
@@ -210,7 +212,7 @@ function Checks.PartChecks(
     self: Checks,
     player: PlayerObject,
     part: BasePart,
-    fovs: { [VisualHandlerTypes.FOVPrimative]: VisualHandlerTypes.AdditionalFOVData },
+    fovs: { [FovObjectLike.FovObjectLike]: VisualHandlerTypes.AdditionalFOVData },
     selected: AimworkSelectedType.AimworkSelected
 )
     local configuration = self.configuration.Checks
@@ -218,32 +220,48 @@ function Checks.PartChecks(
         return
     end
 
+    -- Calculate the 2D position of the part on screen
     local currentCamera = getCurrentCamera()
     local screenPosition, isOnScreen = currentCamera:WorldToViewportPoint(part.Position)
     if configuration.WallCheck and not isOnScreen then
         return
     end
 
-    local screen2D = Vector2.new(screenPosition.X, screenPosition.Y)
-    local distance = selected.distance
-    for fov, data in pairs(fovs) do
-        if not data.check then
-            continue
-        end
-
-        local insideFov, distanceToFov = fov:InsideFOV(screen2D)
-        if
-            not insideFov
-            or ((distanceToFov or math.huge) > distance)
-            or (configuration.WallCheck == "Full" and self:WallHit(part, player.character :: any, currentCamera))
-        then
-            continue
-        end
-
-        distance = distanceToFov
+    -- A full raycasted wall check
+    if configuration.WallCheck == "Full" and self:WallHit(part, player.character :: any, currentCamera) then
+        return
     end
 
-    if not distance or distance == math.huge then
+    local screen2D = Vector2.new(screenPosition.X, screenPosition.Y)
+    local distance = selected.distance
+
+    -- Calculate the smallest distance to center across all FOVs
+    -- If no FOVs are found, then use the mouse position instead
+    if not next(fovs) then
+        distance = math.min(distance, (UserInputService:GetMouseLocation() - screen2D).Magnitude)
+    else
+        for fov, data in pairs(fovs) do
+            fov = fov :: FovObjectLike.FovObjectLikeBase
+
+            if not data.check then
+                continue
+            end
+    
+            local insideFov, distanceToFov = fov:InsideFOV(screen2D)
+            if
+                not insideFov
+                or distanceToFov == nil
+                or (distanceToFov > distance)
+            then
+                continue
+            end
+    
+            distance = distanceToFov
+        end
+    end
+    
+    -- An infinite distance means no valid player was found
+    if distance == math.huge then
         return
     end
 

@@ -1,6 +1,6 @@
 -- Dependencies
 local Trove = require("@pkgs/trove")
-local FovObjectTypes = require("@self/FovObject")
+local FovObjectLike = require("@types/fov_object_like")
 
 --[=[
     @class VisualHandler
@@ -15,11 +15,10 @@ export type AdditionalFOVData = {
     update: boolean,
     check: boolean,
 }
-export type FOVPrimative = FovObjectTypes.FovObject
 
 export type VisualHandlerData = {
     _trove: Trove.Trove,
-    objects: { [FOVPrimative]: AdditionalFOVData },
+    objects: { [FovObjectLike.FovObjectLike]: AdditionalFOVData },
 }
 export type VisualHandler = setmetatable<VisualHandlerData, typeof(VisualHandler)>
 
@@ -39,7 +38,7 @@ end
 --[=[
     Add a new object to the tracker.
 ]=]
-function VisualHandler.Add(self: VisualHandler, fovObject: FOVPrimative, data: AdditionalFOVData?)
+function VisualHandler.Add(self: VisualHandler, fovObject: FovObjectLike.FovObjectLike, data: AdditionalFOVData?)
     if self.objects[fovObject] then
         return false
     end
@@ -59,6 +58,8 @@ end
 ]=]
 function VisualHandler.Update(self: VisualHandler)
     for fovObject, data in pairs(self.objects) do
+        fovObject = fovObject :: FovObjectLike.FovObjectLikeBase
+
         if data.update then
             fovObject:Update()
         end
@@ -73,6 +74,8 @@ function VisualHandler.Check(self: VisualHandler, position: Vector2, fetchAll: b
     local results = {}
 
     for fovObject, data in pairs(self.objects) do
+        fovObject = fovObject :: FovObjectLike.FovObjectLikeBase
+
         if not data.check then
             continue
         end
