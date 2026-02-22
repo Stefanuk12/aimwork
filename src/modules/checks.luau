@@ -184,7 +184,6 @@ function Checks.WallHit(self: Checks, part: BasePart, partAncestor: Instance, cu
     end
 
     local partHit = raycastResult.Instance
-    print(partHit:GetFullName())
     return partHit ~= part or not partAncestor:IsAncestorOf(partHit)
 end
 
@@ -246,20 +245,16 @@ function Checks.PartChecks(
             if not data.check then
                 continue
             end
-    
+
             local insideFov, distanceToFov = fov:InsideFOV(screen2D)
-            if
-                not insideFov
-                or distanceToFov == nil
-                or (distanceToFov > distance)
-            then
+            if not insideFov or distanceToFov == nil or (distanceToFov > distance) then
                 continue
             end
-    
+
             distance = distanceToFov
         end
     end
-    
+
     -- An infinite distance means no valid player was found
     if distance == math.huge then
         return
