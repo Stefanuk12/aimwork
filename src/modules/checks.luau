@@ -184,7 +184,7 @@ function Checks.WallHit(self: Checks, part: BasePart, partAncestor: Instance, cu
     end
 
     local partHit = raycastResult.Instance
-    return partHit ~= part or not partAncestor:IsAncestorOf(partHit)
+    return partHit ~= part and not partAncestor:IsAncestorOf(partHit)
 end
 
 --[=[
