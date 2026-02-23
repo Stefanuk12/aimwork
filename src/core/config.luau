@@ -6,7 +6,7 @@ export type Configuration = {
     Checks: {
         ForceField: boolean,
         Friend: boolean,
-        Health: boolean,
+        Dead: boolean,
         Invisible: boolean,
         Ignored: boolean,
         WallCheck: "OnScreen" | "Full" | false,
@@ -29,7 +29,7 @@ local Configuration: Configuration = {
     Checks = {
         ForceField = true,
         Friend = true,
-        Health = true,
+        Dead = true,
         Invisible = true,
         Ignored = true,
         WallCheck = "Full",

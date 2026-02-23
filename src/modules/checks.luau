@@ -86,12 +86,12 @@ function Checks.Friend(_self: Checks, player: PlayerObject)
 end
 
 --[=[
-    Returns `true` if the `Player` has a health **above** 0.
+    Returns `true` if the `Player` is dead.
 
     @param player PlayerObject -- The player you want to check
 ]=]
-function Checks.Health(_self: Checks, player: PlayerObject)
-    return player.health > 0
+function Checks.Dead(_self: Checks, player: PlayerObject)
+    return player.health <= 0
 end
 
 --[=[
@@ -198,7 +198,7 @@ function Checks.PlayerCheck(self: Checks, player: PlayerObject): boolean
     return not (
         (configuration.ForceField and self:ForceField(player))
         or (configuration.Friend and self:Friend(player))
-        or (configuration.Health and self:Health(player))
+        or (configuration.Dead and self:Dead(player))
     )
 end
 
