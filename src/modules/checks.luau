@@ -262,7 +262,7 @@ function Checks.PartChecks(
 
     selected.part = part
     selected.player = player.instance
-    selected.position = part.Position
+    selected.position = screenPosition
     selected.distance = distance
 end
 
