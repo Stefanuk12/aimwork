@@ -6,7 +6,7 @@ export type Configuration = {
     TargetLock: {
         Enabled: boolean,
         Mode: "Unlock" | "Lock",
-        Bind: Enum.KeyCode | Enum.UserInputType
+        Bind: Enum.KeyCode | Enum.UserInputType,
     },
 
     Checks: {
