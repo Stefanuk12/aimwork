@@ -104,15 +104,33 @@ function Aimwork.Initialise(self: Aimwork)
 
         local bind = self.settings.TargetLock.Bind
         if
-            typeof(bind) == "EnumItem"
+            self.settings.TargetLock.Enabled
+            and typeof(bind) == "EnumItem"
             and (
                 (bind:IsA("KeyCode") and inputObject.KeyCode == bind)
                 or (bind:IsA("UserInputType") and inputObject.UserInputType == bind)
             )
         then
-            self._lockTarget = nil
+            if self.settings.TargetLock.Mode == "Unlock" then
+                self._lockTarget = nil
+                return
+            end
+
+            self:LockTarget()
         end
     end)
+end
+
+--[=[
+    Set the lock target.
+]=]
+function Aimwork.LockTarget(self: Aimwork)
+    if not self._lockTarget and self.selected.player ~= localPlayer then
+        local _, playerObject = self.checks.playerTracker:GetFromInstance(self.selected.player)
+        if playerObject then
+            self._lockTarget = playerObject
+        end
+    end
 end
 
 --[=[
@@ -188,6 +206,8 @@ function Aimwork.Iterate(self: Aimwork)
     if self.settings.TargetLock.Enabled and self._lockTarget then
         self:IteratePlayer(self._lockTarget)
         return
+    elseif self.settings.TargetLock.LockOnly then
+        return
     end
 
     -- Iterate through all players
@@ -196,11 +216,8 @@ function Aimwork.Iterate(self: Aimwork)
     end
 
     -- Check if we got a target
-    if self.settings.TargetLock.Enabled and not self._lockTarget and self.selected.player ~= localPlayer then
-        local _, playerObject = self.checks.playerTracker:GetFromInstance(self.selected.player)
-        if playerObject then
-            self._lockTarget = playerObject
-        end
+    if self.settings.TargetLock.Enabled and self.settings.TargetLock.Mode == "Unlock" then
+        self:LockTarget()
     end
 end
 

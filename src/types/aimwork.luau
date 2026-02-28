@@ -27,6 +27,7 @@ export type AimworkObject = {
     new: (Configuration.Configuration) -> Aimwork,
     Destroy: (self: Aimwork) -> (),
     Initialise: (self: Aimwork) -> (),
+    LockTarget: (self: Aimwork) -> (),
     RegisterFov: (self: Aimwork, flag: string, data: DrawingTypes.DrawingOptionalDataEnum) -> FovObject.FovObject,
     RegisterCustomFov: (self: Aimwork, object: FovObjectLike.FovObjectLike) -> (),
     LoadPatch: (self: Aimwork, patchName: string) -> (),
