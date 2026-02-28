@@ -3,6 +3,12 @@ local PlayerObjectTypes = require("@modules/PlayerTracker/PlayerObject")
 
 --
 export type Configuration = {
+    TargetLock: {
+        Enabled: boolean,
+        Mode: "Unlock" | "Lock",
+        Bind: Enum.KeyCode | Enum.UserInputType
+    },
+
     Checks: {
         ForceField: boolean,
         Friend: boolean,
@@ -31,6 +37,12 @@ export type Configuration = {
     RaycastIgnore: (PlayerObjectTypes.PlayerObject, Camera) -> { Instance },
 }
 local Configuration: Configuration = {
+    TargetLock = {
+        Enabled = false,
+        Mode = "Lock",
+        Bind = Enum.KeyCode.F1,
+    },
+
     Checks = {
         ForceField = true,
         Friend = true,

@@ -14,6 +14,7 @@ local DrawingTypes = require("@types/extra_drawing")
 -- Types
 export type AimworkData = {
     _trove: Trove.Trove,
+    _lockTarget: PlayerObjectTypes.PlayerObject?,
 
     checks: AimworkChecksType.Checks,
     visuals: VisualHandler.VisualHandler,

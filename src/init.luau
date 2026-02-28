@@ -14,6 +14,7 @@ local FovObjectLike = require("@types/fov_object_like")
 -- Services
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
 
 -- Vars
 local localPlayer = Players.LocalPlayer
@@ -95,6 +96,23 @@ function Aimwork.Initialise(self: Aimwork)
     trove:Connect(RunService.Heartbeat, function()
         self:Iterate()
     end)
+
+    trove:Connect(UserInputService.InputEnded, function(inputObject: InputObject, gp: boolean)
+        if gp then
+            return
+        end
+
+        local bind = self.settings.TargetLock.Bind
+        if
+            typeof(bind) == "EnumItem"
+            and (
+                (bind:IsA("KeyCode") and inputObject.KeyCode == bind)
+                or (bind:IsA("UserInputType") and inputObject.UserInputType == bind)
+            )
+        then
+            self._lockTarget = nil
+        end
+    end)
 end
 
 --[=[
@@ -143,7 +161,10 @@ function Aimwork.IteratePlayer(self: Aimwork, player: PlayerObjectTypes.PlayerOb
     local partFilerName = partFilter.Name
     for _, bodyPart in ipairs(player.bodyParts) do
         local name = bodyPart.Name
-        if (partFilter.Type == "Allowlist" and not partFilerName[name]) or (partFilter.Type == "Blocklist" and partFilerName[name]) then
+        if
+            (partFilter.Type == "Allowlist" and not partFilerName[name])
+            or (partFilter.Type == "Blocklist" and partFilerName[name])
+        then
             continue
         end
 
@@ -163,9 +184,23 @@ function Aimwork.Iterate(self: Aimwork)
     -- Update FOV positions
     self.visuals:Update()
 
+    -- We are locked onto someone
+    if self.settings.TargetLock.Enabled and self._lockTarget then
+        self:IteratePlayer(self._lockTarget)
+        return
+    end
+
     -- Iterate through all players
     for _, player in ipairs(self.checks.playerTracker.players) do
         self:IteratePlayer(player)
+    end
+
+    -- Check if we got a target
+    if self.settings.TargetLock.Enabled and not self._lockTarget and self.selected.player ~= localPlayer then
+        local _, playerObject = self.checks.playerTracker:GetFromInstance(self.selected.player)
+        if playerObject then
+            self._lockTarget = playerObject
+        end
     end
 end
 
