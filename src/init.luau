@@ -139,7 +139,14 @@ function Aimwork.IteratePlayer(self: Aimwork, player: PlayerObjectTypes.PlayerOb
     end
 
     -- Perform part checks
+    local partFilter = self.settings.PartFilter
+    local partFilerName = partFilter.Name
     for _, bodyPart in ipairs(player.bodyParts) do
+        local name = bodyPart.Name
+        if (partFilter.Type == "Allowlist" and not partFilerName[name]) or (partFilter.Type == "Blocklist" and partFilerName[name]) then
+            continue
+        end
+
         self.checks:PartChecks(player, bodyPart, self.visuals.objects, self.selected)
     end
 end

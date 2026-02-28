@@ -12,6 +12,11 @@ export type Configuration = {
         WallCheck: "OnScreen" | "Full" | false,
     },
 
+    PartFilter: {
+        Type: "Allowlist" | "Blocklist",
+        Name: { [string]: true },
+    },
+
     Ignored: {
         IgnoreLocalTeam: boolean,
 
@@ -33,6 +38,11 @@ local Configuration: Configuration = {
         Invisible = true,
         Ignored = true,
         WallCheck = "Full",
+    },
+
+    PartFilter = {
+        Type = "Blocklist",
+        Name = {},
     },
 
     Ignored = {
