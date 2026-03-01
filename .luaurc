@@ -4,11 +4,10 @@
     "typeErrors": true,
     "aliases": {
         "core": "./src/core",
-        "modules": "./src/modules",
         "functions": "./src/functions",
+        "modules": "./src/modules",
         "patches": "./src/patches",
         "types": "./src/types",
-        "shared": "./src/shared",
         "pkgs": "./roblox_packages"
     },
     "globals": [],
