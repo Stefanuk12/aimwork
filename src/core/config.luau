@@ -1,11 +1,21 @@
 -- Dependencies
 local PlayerObjectTypes = require("@modules/PlayerTracker/PlayerObject")
 
+--- @type ConfigurationTargetLockMode "Unlock" | "Lock"
+--- @within Configuration
+--- Whether the keybind should lock onto a player, or release a lock.
+---
+--- 1. For example, if the mode is `"Unlock"`, then Aimwork will automatically lock to the first player it sees.
+--- 2. For it to disengage, you must press the bind.
+---
+--- 3. On the other hand, if the mode is `"Lock"`, then Aimwork will only set the locked player when the bind is pressed.
+export type ConfigurationTargetLockMode = "Unlock" | "Lock"
+
 --- @interface ConfigurationTargetLock
 --- @within Configuration
 --- .Enabled boolean -- Enable the locking behaviour.
 --- .LockOnly boolean -- Whether Aimwork should **only** target locked players
---- .Mode "Unlock" | "Lock" -- Whether the keybind should lock onto a player, or release a lock.
+--- .Mode ConfigurationTargetLockMode -- Whether the keybind should lock onto a player, or release a lock.
 --- .Bind Enum.KeyCode | Enum.UserInputType -- The bind that triggers the (un)lock
 --- Lock onto only one player.
 export type ConfigurationTargetLock = {
@@ -20,7 +30,7 @@ export type ConfigurationTargetLock = {
     --- For it to disengage, you must press the bind.
     ---
     --- On the other hand, if the mode is `"Lock"`, then Aimwork will only set the locked player when the bind is pressed.
-    Mode: "Unlock" | "Lock",
+    Mode: ConfigurationTargetLockMode,
     --- The bind that triggers the (un)lock.
     Bind: Enum.KeyCode | Enum.UserInputType,
 }
