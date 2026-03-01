@@ -75,40 +75,40 @@ export type ConfigurationPartFilter = {
     Name: { [string]: true },
 }
 
---- @prop Ignored
---- @within Configuration
---- Global ignore / whitelist configuration used by the `Ignored` checks.
-export type ConfigurationIgnoredWhitelist = {
+--- @prop AllowlistEnabledFor
+--- @within ConfigurationIgnored
+--- Nested configuration controlling allowlist behaviour for teams/players.
+export type ConfigurationIgnoredAllowlist = {
     --- @prop Teams
-    --- @within ConfigurationIgnoredWhitelist
-    --- When `true`, `Ignored.Teams` is treated as a whitelist; when `false`, as a blacklist.
+    --- @within ConfigurationIgnoredAllowlist
+    --- When `true`, `Ignored.Teams` is treated as a allowlist; when `false`, as a blocklist.
     Teams: boolean,
     --- @prop Players
-    --- @within ConfigurationIgnoredWhitelist
-    --- When `true`, `Ignored.Players` is treated as a whitelist; when `false`, as a blacklist.
+    --- @within ConfigurationIgnoredAllowlist
+    --- When `true`, `Ignored.Players` is treated as a allowlist; when `false`, as a blocklist.
     Players: boolean,
 }
---- @prop Whitelist
---- @within ConfigurationIgnored
---- Controls whether the `Teams` / `Players` lists are treated as whitelists instead of blacklists.
+--- @prop Ignored
+--- @within Configuration
+--- Global ignore / allowlist configuration used by the `Ignored` checks.
 export type ConfigurationIgnored = {
     --- @prop IgnoreLocalTeam
     --- @within ConfigurationIgnored
     --- If `true`, players on the local player's team are ignored.
     IgnoreLocalTeam: boolean,
 
-    --- @prop Whitelist
+    --- @prop AllowlistEnabledFor
     --- @within ConfigurationIgnored
-    --- Nested configuration controlling whitelist behaviour for teams/players.
-    Whitelist: ConfigurationIgnoredWhitelist,
+    --- Nested configuration controlling allowlist behaviour for teams/players.
+    AllowlistEnabledFor: ConfigurationIgnoredAllowlist,
 
     --- @prop Teams
     --- @within ConfigurationIgnored
-    --- Team objects to ignore or whitelist depending on `Whitelist.Teams`.
+    --- Team objects to ignore or allowlist depending on `AllowlistEnabledFor.Teams`.
     Teams: { Team },
     --- @prop Players
     --- @within ConfigurationIgnored
-    --- Player instances or user IDs to ignore or whitelist depending on `Whitelist.Players`.
+    --- Player instances or user IDs to ignore or allowlist depending on `AllowlistEnabledFor.Players`.
     Players: { number | Player },
 }
 
@@ -149,7 +149,7 @@ local Configuration: Configuration = {
 
     Ignored = {
         IgnoreLocalTeam = true,
-        Whitelist = {
+        AllowlistEnabledFor = {
             Teams = false,
             Players = false,
         },

@@ -118,7 +118,7 @@ end
     @param player PlayerObject -- The player you want to check
 ]=]
 function Checks.IgnoredPlayer(self: Checks, player: PlayerObject)
-    local mode = self.configuration.Ignored.Whitelist
+    local mode = self.configuration.Ignored.AllowlistEnabledFor
 
     for _, ignoredPlayer in ipairs(self.configuration.Ignored.Players) do
         local playerType = typeof(ignoredPlayer)
@@ -140,7 +140,7 @@ end
     @param player PlayerObject -- The player you want to check
 ]=]
 function Checks.IgnoredTeam(self: Checks, player: PlayerObject)
-    local mode = self.configuration.Ignored.Whitelist
+    local mode = self.configuration.Ignored.AllowlistEnabledFor
     local ourTeam = player.instance.Team
 
     for _, ignoredTeam in ipairs(self.configuration.Ignored.Teams) do
