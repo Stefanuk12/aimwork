@@ -31,9 +31,9 @@ local defaultSelected: typeof(table.freeze({} :: AimworkSelectedTypes.AimworkSel
     The main class that handles everything.
 ]=]
 --[=[
-    @prop fov FovObject
+    @prop visuals VisualHandler
     @within Aimwork
-    The FOV to use.
+    Holds and handles all visual related stuff.
 ]=]
 --[=[
     @prop checks Checks
