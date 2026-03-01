@@ -91,13 +91,24 @@ end
     Finishes the initialisation process for [Aimwork], called during [Aimwork.new].
 ]=]
 function Aimwork.Initialise(self: Aimwork)
-    local trove = self._trove
+    self:InitialiseIterate()
+    self:InitialiseKeybind()
+end
 
-    trove:Connect(RunService.Heartbeat, function()
+--[=[
+    Initialise the heartbeat connection, that calls [Aimwork.Iterate] every frame.
+]=]
+function Aimwork.InitialiseIterate(self: Aimwork)
+    self._trove:Connect(RunService.Heartbeat, function()
         self:Iterate()
     end)
+end
 
-    trove:Connect(UserInputService.InputEnded, function(inputObject: InputObject, gp: boolean)
+--[=[
+    Initialise the keybind connection.
+]=]
+function Aimwork.InitialiseKeybind(self: Aimwork)
+    self._trove:Connect(UserInputService.InputEnded, function(inputObject: InputObject, gp: boolean)
         if gp then
             return
         end
