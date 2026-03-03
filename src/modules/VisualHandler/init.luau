@@ -36,6 +36,35 @@ function VisualHandler.new(): VisualHandler
 end
 
 --[=[
+    Get a specific visual handler, by its id.
+]=]
+function VisualHandler.Get(self: VisualHandler, id: string): { FovObjectLike.FovObjectLike }
+    local objects = {}
+
+    for object, _ in self.objects do
+        if (object :: FovObjectLike.FovObjectLikeBase).id == id then
+            table.insert(objects, object)
+        end
+    end
+
+    return objects
+end
+
+--[=[
+    Get a specific visual handler, by its id, returning the first result.
+]=]
+function VisualHandler.GetFirst(self: VisualHandler, id: string): FovObjectLike.FovObjectLike?
+    for object, _ in self.objects do
+        if (object :: FovObjectLike.FovObjectLikeBase).id == id then
+            return object
+        end
+    end
+
+    return nil
+end
+
+
+--[=[
     Add a new object to the tracker.
 ]=]
 function VisualHandler.Add(self: VisualHandler, fovObject: FovObjectLike.FovObjectLike, data: AdditionalFOVData?)
