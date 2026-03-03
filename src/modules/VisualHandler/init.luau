@@ -63,7 +63,6 @@ function VisualHandler.GetFirst(self: VisualHandler, id: string): FovObjectLike.
     return nil
 end
 
-
 --[=[
     Add a new object to the tracker.
 ]=]
