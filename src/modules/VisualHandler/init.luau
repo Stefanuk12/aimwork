@@ -1,5 +1,6 @@
 -- Dependencies
 local Trove = require("@pkgs/trove")
+local AimworkSelected = require("@types/selected")
 local FovObjectLike = require("@types/fov_object_like")
 
 --[=[
@@ -84,12 +85,12 @@ end
 --[=[
     Update all of the objects.
 ]=]
-function VisualHandler.Update(self: VisualHandler)
+function VisualHandler.Update(self: VisualHandler, extraData: AimworkSelected.AimworkSelected)
     for fovObject, data in pairs(self.objects) do
         fovObject = fovObject :: FovObjectLike.FovObjectLikeBase
 
         if data.update then
-            fovObject:Update()
+            fovObject:Update(extraData)
         end
     end
 end

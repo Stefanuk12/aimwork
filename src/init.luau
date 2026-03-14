@@ -210,9 +210,6 @@ function Aimwork.Iterate(self: Aimwork)
         (self.selected :: any)[i] = v -- LUAU TYPE SOLVER ISSUE
     end
 
-    -- Update FOV positions
-    self.visuals:Update()
-
     -- We are locked onto someone
     if self.settings.TargetLock.Enabled and self._lockTarget then
         self:IteratePlayer(self._lockTarget)
@@ -225,6 +222,9 @@ function Aimwork.Iterate(self: Aimwork)
     for _, player in ipairs(self.checks.playerTracker.players) do
         self:IteratePlayer(player)
     end
+
+    -- Update FOV positions
+    self.visuals:Update(self.selected)
 
     -- Check if we got a target
     if self.settings.TargetLock.Enabled and self.settings.TargetLock.Mode == "Unlock" then
