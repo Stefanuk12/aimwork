@@ -85,7 +85,7 @@ end
 --[=[
     Update all of the objects.
 ]=]
-function VisualHandler.Update(self: VisualHandler, extraData: AimworkSelected.AimworkSelected)
+function VisualHandler.Update(self: VisualHandler, extraData: AimworkSelected.AimworkSelected?)
     for fovObject, data in pairs(self.objects) do
         fovObject = fovObject :: FovObjectLike.FovObjectLikeBase
 
