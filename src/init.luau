@@ -136,11 +136,37 @@ end
     Set the lock target.
 ]=]
 function Aimwork.LockTarget(self: Aimwork)
+    local lockSettings = self.settings.TargetLock
+    local wasLockOnly = lockSettings.LockOnly
+    local isLockMode = lockSettings.Mode == "Lock"
+    local previousLockTarget = self._lockTarget
+
+    if wasLockOnly or isLockMode then
+        if wasLockOnly then
+            lockSettings.LockOnly = false
+        end
+        if isLockMode then
+            self._lockTarget = nil
+        end
+
+        self:Iterate()
+
+        if wasLockOnly then
+            lockSettings.LockOnly = true
+        end
+    end
+
+    -- Set the lock target, if we found someone
     if not self._lockTarget and self.selected.player ~= localPlayer then
         local _, playerObject = self.checks.playerTracker:GetFromInstance(self.selected.player)
         if playerObject then
             self._lockTarget = playerObject
         end
+    end
+
+    -- No target was found, revert to the old one
+    if isLockMode and not self._lockTarget then
+        self._lockTarget = previousLockTarget
     end
 end
 
