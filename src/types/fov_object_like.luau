@@ -6,7 +6,7 @@ export type FovObjectLikeData = {
 
 export type FovObjectLikeBase = FovObjectLikeData & {
     Destroy: (self: FovObjectLikeBase) -> (),
-    Update: (self: FovObjectLikeBase, data: AimingSelected.AimworkSelected?, ctx: any) -> (),
+    Update: (self: FovObjectLikeBase, data: AimingSelected.AimworkSelected?) -> (),
     InsideFOV: (self: FovObjectLikeBase, position: Vector2) -> (boolean, number?),
 }
 
@@ -14,7 +14,7 @@ export type FovObjectLikeMetatable = typeof(setmetatable(
     {},
     {} :: FovObjectLikeData & {
         Destroy: (self: FovObjectLikeMetatable) -> (),
-        Update: (self: FovObjectLikeMetatable, data: AimingSelected.AimworkSelected?, ctx: any) -> (),
+        Update: (self: FovObjectLikeMetatable, data: AimingSelected.AimworkSelected?) -> (),
         InsideFOV: (self: FovObjectLikeMetatable, position: Vector2) -> (boolean, number?),
     }
 ))

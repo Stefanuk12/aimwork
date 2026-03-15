@@ -19,7 +19,6 @@ export type AdditionalFOVData = {
 
 export type VisualHandlerData = {
     _trove: Trove.Trove,
-    ctx: any,
     objects: { [FovObjectLike.FovObjectLike]: AdditionalFOVData },
 }
 export type VisualHandler = setmetatable<VisualHandlerData, typeof(VisualHandler)>
@@ -29,10 +28,9 @@ export type VisualHandler = setmetatable<VisualHandlerData, typeof(VisualHandler
 
     @tag constructor
 ]=]
-function VisualHandler.new(ctx: any?): VisualHandler
+function VisualHandler.new(): VisualHandler
     local self: VisualHandlerData = {
         _trove = Trove.new(),
-        ctx = ctx,
         objects = {},
     }
     return setmetatable(self, VisualHandler)
@@ -92,7 +90,7 @@ function VisualHandler.Update(self: VisualHandler, extraData: AimworkSelected.Ai
         fovObject = fovObject :: FovObjectLike.FovObjectLikeBase
 
         if data.update then
-            fovObject:Update(extraData, self.ctx)
+            fovObject:Update(extraData)
         end
     end
 end

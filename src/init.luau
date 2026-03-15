@@ -63,12 +63,12 @@ export type Aimwork = AimworkTypes.Aimwork
     @param settings Configuration
     @tag constructor
 ]=]
-function Aimwork.new(settings: Configuration.Configuration, ctx: any?): Aimwork
+function Aimwork.new(settings: Configuration.Configuration): Aimwork
     local trove = Trove.new()
     local self: AimworkTypes.AimworkData = {
         _trove = trove,
 
-        visuals = trove:Add(VisualHandler.new(ctx)),
+        visuals = trove:Add(VisualHandler.new()),
         checks = trove:Add(AimworkChecks.new(settings)),
         settings = settings,
         selected = table.clone(defaultSelected) :: AimworkSelectedTypes.AimworkSelected,
